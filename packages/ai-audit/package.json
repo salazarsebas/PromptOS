@@ -1,0 +1,27 @@
+{
+  "name": "@promptos/ai-audit",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "ai-audit": "./dist/bin.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b --watch",
+    "start": "bun run src/bin.ts"
+  },
+  "dependencies": {
+    "@promptos/shared": "workspace:*",
+    "commander": "^13.0.0",
+    "ts-morph": "^25.0.0",
+    "chalk": "^5.4.0"
+  }
+}
