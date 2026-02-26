@@ -1,3 +1,5 @@
+export type { PromptOSConfig } from './config.js';
+
 export type {
   CostEstimate,
   CostReport,
@@ -10,6 +12,14 @@ export type {
   ScanError,
   ScanResult,
 } from './detection.js';
+
+export type {
+  DeepAnalysisResult,
+  OpportunitySeverity,
+  OptimizationOpportunity,
+  OptimizationType,
+} from './optimization.js';
+
 export type {
   AnthropicModel,
   CallCategory,

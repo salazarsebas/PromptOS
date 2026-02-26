@@ -4,49 +4,75 @@ import type { SourceFile } from 'ts-morph';
 import { Project, SyntaxKind } from 'ts-morph';
 import { matchCallExpression } from './pattern-matcher.js';
 
+export type { SourceFile };
+
 const project = new Project({
   compilerOptions: { allowJs: true, checkJs: false },
   skipAddingFilesFromTsConfig: true,
   skipFileDependencyResolution: true,
 });
 
+export interface DeepAnalysisFileResult {
+  calls: DetectedCall[];
+  sourceFile: SourceFile;
+}
+
 export async function analyzeFile(filePath: string): Promise<DetectedCall[]> {
   const sourceFile = project.addSourceFileAtPath(filePath);
   const detected: DetectedCall[] = [];
 
   try {
-    const activeProviders = detectActiveProviders(sourceFile);
-    if (activeProviders.length === 0) {
-      return detected;
-    }
-
-    const callExpressions = sourceFile.getDescendantsOfKind(SyntaxKind.CallExpression);
-
-    for (const callExpr of callExpressions) {
-      const match = matchCallExpression(callExpr, activeProviders);
-      if (match) {
-        const { line, column } = sourceFile.getLineAndColumnAtPos(callExpr.getStart());
-        const contextSnippet = extractContextSnippet(sourceFile, line);
-
-        detected.push({
-          filePath,
-          line,
-          column,
-          provider: match.provider,
-          method: match.fullMethodChain,
-          category: match.category,
-          modelArgument: match.modelArgument,
-          inferredModel: match.inferredModel,
-          contextSnippet,
-          confidence: match.confidence,
-        });
-      }
-    }
+    analyzeSourceFile(sourceFile, filePath, detected);
   } finally {
     project.removeSourceFile(sourceFile);
   }
 
   return detected;
+}
+
+export async function analyzeFileDeep(filePath: string): Promise<DeepAnalysisFileResult> {
+  const sourceFile = project.addSourceFileAtPath(filePath);
+  const calls: DetectedCall[] = [];
+  analyzeSourceFile(sourceFile, filePath, calls);
+  return { calls, sourceFile };
+}
+
+export function releaseSourceFile(sourceFile: SourceFile): void {
+  project.removeSourceFile(sourceFile);
+}
+
+function analyzeSourceFile(
+  sourceFile: SourceFile,
+  filePath: string,
+  detected: DetectedCall[],
+): void {
+  const activeProviders = detectActiveProviders(sourceFile);
+  if (activeProviders.length === 0) {
+    return;
+  }
+
+  const callExpressions = sourceFile.getDescendantsOfKind(SyntaxKind.CallExpression);
+
+  for (const callExpr of callExpressions) {
+    const match = matchCallExpression(callExpr, activeProviders);
+    if (match) {
+      const { line, column } = sourceFile.getLineAndColumnAtPos(callExpr.getStart());
+      const contextSnippet = extractContextSnippet(sourceFile, line);
+
+      detected.push({
+        filePath,
+        line,
+        column,
+        provider: match.provider,
+        method: match.fullMethodChain,
+        category: match.category,
+        modelArgument: match.modelArgument,
+        inferredModel: match.inferredModel,
+        contextSnippet,
+        confidence: match.confidence,
+      });
+    }
+  }
 }
 
 function matchesProviderImport(moduleSpecifier: string): Provider | null {

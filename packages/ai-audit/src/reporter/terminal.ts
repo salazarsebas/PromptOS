@@ -1,5 +1,6 @@
 import type { AuditReport } from '@promptos/shared';
 import chalk from 'chalk';
+import { capitalize } from './utils.js';
 
 export function formatTerminal(report: AuditReport): string {
   const lines: string[] = [];
@@ -57,12 +58,48 @@ export function formatTerminal(report: AuditReport): string {
     }
   }
 
+  // Deep analysis
+  if (report.deepAnalysis) {
+    lines.push('');
+    addDeepAnalysisSection(lines, report.deepAnalysis);
+  }
+
   lines.push('');
   return lines.join('\n');
 }
 
-function capitalize(str: string): string {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+function addDeepAnalysisSection(
+  lines: string[],
+  deepAnalysis: import('@promptos/shared').DeepAnalysisResult,
+): void {
+  const { opportunities, totalEstimatedSavingsUSD } = deepAnalysis;
+
+  lines.push(chalk.bold.yellow('Optimization Opportunities:'));
+  lines.push(
+    `  ${opportunities.length} found — estimated savings: ${chalk.green(`$${totalEstimatedSavingsUSD.toFixed(2)}/month`)}`,
+  );
+  lines.push('');
+
+  for (const opp of opportunities) {
+    const severity = formatSeverity(opp.severity);
+    lines.push(`  ${severity} ${chalk.bold(opp.type)}`);
+    lines.push(`    ${opp.filePath}:${opp.line}`);
+    lines.push(`    ${opp.description}`);
+    lines.push(chalk.dim(`    → ${opp.suggestion}`));
+    lines.push(chalk.green(`    ~$${opp.estimatedMonthlySavingsUSD.toFixed(2)}/mo savings`));
+    lines.push('');
+  }
+}
+
+function formatSeverity(severity: string): string {
+  switch (severity) {
+    case 'high':
+      return chalk.red.bold('[HIGH]');
+    case 'medium':
+      return chalk.yellow.bold('[MED]');
+    default:
+      return chalk.dim('[LOW]');
+  }
 }
 
 function padRight(str: string, length: number): string {
