@@ -40,6 +40,16 @@ describe('normalizeAnthropicMessages', () => {
     });
     expect(result).toEqual([{ role: 'user', content: 'First\nSecond' }]);
   });
+
+  it('skips messages with empty content', () => {
+    const result = normalizeAnthropicMessages({
+      messages: [
+        { role: 'user', content: '' },
+        { role: 'assistant', content: 'Hello' },
+      ],
+    });
+    expect(result).toEqual([{ role: 'assistant', content: 'Hello' }]);
+  });
 });
 
 describe('denormalizeToAnthropic', () => {
@@ -55,6 +65,16 @@ describe('denormalizeToAnthropic', () => {
   it('handles no system message', () => {
     const result = denormalizeToAnthropic([{ role: 'user', content: 'Hello' }]);
     expect(result.system).toBeUndefined();
+    expect(result.messages).toEqual([{ role: 'user', content: 'Hello' }]);
+  });
+
+  it('concatenates multiple system messages (B4)', () => {
+    const result = denormalizeToAnthropic([
+      { role: 'system', content: 'You are helpful.' },
+      { role: 'user', content: 'Hello' },
+      { role: 'system', content: 'Be concise.' },
+    ]);
+    expect(result.system).toBe('You are helpful.\nBe concise.');
     expect(result.messages).toEqual([{ role: 'user', content: 'Hello' }]);
   });
 

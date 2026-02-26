@@ -1,3 +1,4 @@
+import type { Dirent } from 'node:fs';
 import { readdir } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 
@@ -36,7 +37,13 @@ export async function collectFiles(
   const results: string[] = [];
 
   async function walk(dir: string): Promise<void> {
-    const entries = await readdir(dir, { withFileTypes: true });
+    let entries: Dirent[];
+    try {
+      entries = await readdir(dir, { withFileTypes: true });
+    } catch {
+      // Skip directories that can't be read (EACCES, ELOOP, ENOENT, etc.)
+      return;
+    }
     const promises: Promise<void>[] = [];
 
     for (const entry of entries) {

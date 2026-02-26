@@ -55,11 +55,11 @@ describe('loadConfig', () => {
     await expect(loadConfig(tempDir)).rejects.toThrow();
   });
 
-  it('throws on invalid config shape', async () => {
+  it('throws on invalid config shape with field name', async () => {
     const configPath = join(tempDir, '.promptosrc.json');
     await writeFile(configPath, JSON.stringify({ callsPerMonth: 'not a number' }));
 
-    await expect(loadConfig(tempDir)).rejects.toThrow('Invalid config file');
+    await expect(loadConfig(tempDir)).rejects.toThrow('"callsPerMonth" must be a positive number');
   });
 
   it('rejects negative numeric values', async () => {

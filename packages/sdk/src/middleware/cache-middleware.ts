@@ -11,7 +11,7 @@ export function createCacheMiddleware(config: CacheConfig): Middleware {
   const middleware: Middleware = async (ctx, next) => {
     if (!config.enabled) return next(ctx);
 
-    const key = computeCacheKey(ctx.provider, ctx.model, ctx.messages);
+    const key = computeCacheKey(ctx.provider, ctx.model, ctx.messages, ctx.originalRequest);
     const cached = cache.get(key);
 
     if (cached) {
@@ -22,7 +22,7 @@ export function createCacheMiddleware(config: CacheConfig): Middleware {
     }
 
     const result = await next(ctx);
-    cache.set(key, result);
+    cache.set(key, structuredClone(result));
     return result;
   };
 

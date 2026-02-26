@@ -2,6 +2,7 @@ import type { OptimizationOpportunity } from '@promptos/shared';
 import { extractMessageContents, findApiCallNearLine } from './ast-utils.js';
 import type { AnalyzerContext } from './context.js';
 
+// Cached/shared system prompts typically save ~30% of per-call input token cost
 const REDUNDANCY_SAVINGS_RATIO = 0.3;
 
 export function detectRedundancy(context: AnalyzerContext): OptimizationOpportunity[] {

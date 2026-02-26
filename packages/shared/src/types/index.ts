@@ -34,6 +34,22 @@ export type {
 export type { AuditReport, ReportFormat } from './report.js';
 
 export type {
+  ComplexityLevel,
+  ComplexityResult,
+  ComplexitySignals,
+  HealthCheckConfig,
+  HealthStatus,
+  ProviderConfig,
+  RouterConfig,
+  RouterProvider,
+  RouterRequest,
+  RouterResponse,
+  RoutingAttempt,
+  RoutingConfig,
+  RoutingStrategy,
+} from './router.js';
+
+export type {
   CacheConfig,
   CacheEntry,
   CompressionConfig,

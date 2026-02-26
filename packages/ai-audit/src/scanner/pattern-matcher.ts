@@ -40,14 +40,21 @@ export function matchCallExpression(
   return null;
 }
 
+const patternCache = new Map<string, RegExp>();
+
 function matchesPattern(
   expressionText: string,
   objectPattern: string,
   methodName: string,
 ): boolean {
-  const patternParts = objectPattern.replace('*', '[\\w$]+');
-  const fullPattern = methodName ? `${patternParts}\\.${methodName}` : patternParts;
-  const regex = new RegExp(`^${fullPattern}$`);
+  const cacheKey = `${objectPattern}::${methodName}`;
+  let regex = patternCache.get(cacheKey);
+  if (!regex) {
+    const patternParts = objectPattern.replaceAll('*', '[\\w$]+').replaceAll('.', '\\.');
+    const fullPattern = methodName ? `${patternParts}\\.${methodName}` : patternParts;
+    regex = new RegExp(`^${fullPattern}$`);
+    patternCache.set(cacheKey, regex);
+  }
   return regex.test(expressionText);
 }
 

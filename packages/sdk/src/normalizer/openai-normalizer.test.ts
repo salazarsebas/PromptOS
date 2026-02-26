@@ -26,9 +26,14 @@ describe('normalizeOpenAIMessages', () => {
     expect(result).toEqual([{ role: 'user', content: 'Part 1\nPart 2' }]);
   });
 
-  it('handles null content', () => {
+  it('handles null content — keeps message with empty string (B3)', () => {
     const result = normalizeOpenAIMessages([{ role: 'assistant', content: null }]);
-    expect(result).toEqual([]);
+    expect(result).toEqual([{ role: 'assistant', content: '' }]);
+  });
+
+  it('keeps messages with empty string content (B3)', () => {
+    const result = normalizeOpenAIMessages([{ role: 'assistant', content: '' }]);
+    expect(result).toEqual([{ role: 'assistant', content: '' }]);
   });
 
   it('maps unknown roles to user', () => {

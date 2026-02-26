@@ -116,6 +116,6 @@ function extractContextSnippet(sourceFile: SourceFile, line: number): string {
   const fullText = sourceFile.getFullText();
   const lines = fullText.split('\n');
   const start = Math.max(0, line - 2);
-  const end = Math.min(lines.length, line + 1);
+  const end = Math.min(lines.length, line + 2);
   return lines.slice(start, end).join('\n');
 }

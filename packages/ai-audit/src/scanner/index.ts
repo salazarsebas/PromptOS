@@ -3,6 +3,7 @@ import { collectFiles } from '@promptos/shared';
 import type { SourceFile } from 'ts-morph';
 import { analyzeFile, analyzeFileDeep, releaseSourceFile } from './ast-analyzer.js';
 
+// Process files in batches to limit concurrent ts-morph parsing memory usage
 const BATCH_SIZE = 20;
 
 export interface DeepScanResult {
@@ -10,9 +11,9 @@ export interface DeepScanResult {
   sourceFiles: Map<string, SourceFile>;
 }
 
-export async function scan(targetPath: string): Promise<ScanResult> {
+export async function scan(targetPath: string, ignoreDirs?: Set<string>): Promise<ScanResult> {
   const start = performance.now();
-  const files = await collectFiles(targetPath);
+  const files = await collectFiles(targetPath, undefined, ignoreDirs);
   const calls: DetectedCall[] = [];
   const errors: ScanError[] = [];
   let skippedFiles = 0;
@@ -48,9 +49,12 @@ export async function scan(targetPath: string): Promise<ScanResult> {
   };
 }
 
-export async function scanDeep(targetPath: string): Promise<DeepScanResult> {
+export async function scanDeep(
+  targetPath: string,
+  ignoreDirs?: Set<string>,
+): Promise<DeepScanResult> {
   const start = performance.now();
-  const files = await collectFiles(targetPath);
+  const files = await collectFiles(targetPath, undefined, ignoreDirs);
   const calls: DetectedCall[] = [];
   const errors: ScanError[] = [];
   const sourceFiles = new Map<string, SourceFile>();

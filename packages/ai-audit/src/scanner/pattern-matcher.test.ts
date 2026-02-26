@@ -96,6 +96,25 @@ describe('matchCallExpression', () => {
     expect(match?.inferredModel).toBe('gpt-4o-mini'); // default
   });
 
+  it('dots in patterns are escaped (B6)', () => {
+    // "openai.chat.completions" should NOT match "openaiXchatYcompletions"
+    const call = getFirstCallExpression(`
+      openaiXchatYcompletions.create({ model: 'gpt-4o', messages: [] });
+    `);
+    const match = matchCallExpression(call, ['openai']);
+    expect(match).toBeNull();
+  });
+
+  it('wildcards replace all occurrences (B6)', () => {
+    // Pattern like "*.chat.completions" with a wildcard should still match any variable name
+    const call = getFirstCallExpression(`
+      myClient.chat.completions.create({ model: 'gpt-4o', messages: [] });
+    `);
+    const match = matchCallExpression(call, ['openai']);
+    expect(match).not.toBeNull();
+    expect(match?.provider).toBe('openai');
+  });
+
   it('detects calls with different variable names', () => {
     const call = getFirstCallExpression(`
       client.chat.completions.create({ model: 'gpt-4o', messages: [] });

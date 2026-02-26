@@ -3,6 +3,7 @@ import { estimateTokensFast } from '@promptos/shared';
 import { extractMessageContents, findApiCallNearLine } from './ast-utils.js';
 import type { AnalyzerContext } from './context.js';
 
+// Compressing oversized prompts typically saves ~40% of the overage cost (conservative)
 const OVERSIZED_PROMPT_SAVINGS_RATIO = 0.4;
 
 export function detectOversizedPrompts(context: AnalyzerContext): OptimizationOpportunity[] {

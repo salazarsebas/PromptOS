@@ -16,7 +16,7 @@ export function normalizeOpenAIMessages(messages: OpenAIMessage[]): NormalizedMe
   for (const msg of messages) {
     const role = normalizeRole(msg.role);
     const content = extractContent(msg.content);
-    if (content) {
+    if (content !== undefined) {
       result.push({ role, content });
     }
   }

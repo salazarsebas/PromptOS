@@ -21,18 +21,24 @@ export function compressMessages(
 }
 
 function compressByTrim(messages: NormalizedMessage[], maxTokens: number): NormalizedMessage[] {
-  // Trim from the last user message working backwards
   for (let i = messages.length - 1; i >= 0; i--) {
     const msg = messages[i];
     if (!msg || msg.role === 'system') continue;
 
-    while (countTokens(messages) > maxTokens && msg.content.length > 0) {
-      const overage = countTokens(messages) - maxTokens;
-      const charsToRemove = Math.max(1, overage * 4);
-      msg.content = msg.content.slice(0, -charsToRemove);
+    // Use codepoint-aware slicing to avoid splitting surrogate pairs
+    let codepoints = Array.from(msg.content);
+    let currentTotal = countTokens(messages);
+
+    while (currentTotal > maxTokens && codepoints.length > 0) {
+      const overage = currentTotal - maxTokens;
+      // Estimate chars to remove (4 chars ≈ 1 token)
+      const cpToRemove = Math.max(1, overage * 4);
+      codepoints = codepoints.slice(0, -cpToRemove);
+      msg.content = codepoints.join('');
+      currentTotal = countTokens(messages);
     }
 
-    if (countTokens(messages) <= maxTokens) break;
+    if (currentTotal <= maxTokens) break;
   }
 
   return messages;
@@ -56,22 +62,80 @@ function compressBySentence(messages: NormalizedMessage[], maxTokens: number): N
   return messages;
 }
 
+// Common abbreviations that shouldn't be treated as sentence endings
+const ABBREVIATIONS = new Set([
+  'mr',
+  'mrs',
+  'ms',
+  'dr',
+  'prof',
+  'sr',
+  'jr',
+  'st',
+  'ave',
+  'vs',
+  'etc',
+  'inc',
+  'ltd',
+  'corp',
+  'dept',
+  'univ',
+  'govt',
+  'approx',
+  'est',
+  'vol',
+  'no',
+  'fig',
+  'eq',
+  'e.g',
+  'i.e',
+]);
+
 function splitSentences(text: string): string[] {
   const result: string[] = [];
   const pattern = /[^.!?]*[.!?]+\s*/g;
   let lastIndex = 0;
 
   for (let match = pattern.exec(text); match !== null; match = pattern.exec(text)) {
-    result.push(match[0]);
+    const segment = match[0];
+
+    // Check if this ends with an abbreviation (e.g., "Mr. ")
+    const wordBeforePeriod =
+      segment
+        .trimEnd()
+        .replace(/[.!?]+$/, '')
+        .split(/\s+/)
+        .pop() ?? '';
+    const isAbbreviation = ABBREVIATIONS.has(wordBeforePeriod.toLowerCase());
+
+    if (isAbbreviation && result.length === 0) {
+      // First segment with abbreviation — accumulate into buffer
+      result.push(segment);
+    } else if (isAbbreviation && result.length > 0) {
+      // Merge abbreviation into previous segment
+      result[result.length - 1] += segment;
+    } else if (result.length > 0 && isTrailingAbbreviation(result[result.length - 1] ?? '')) {
+      // Previous segment ended with abbreviation — merge
+      result[result.length - 1] += segment;
+    } else {
+      result.push(segment);
+    }
+
     lastIndex = pattern.lastIndex;
   }
 
-  // Remaining text without sentence-ending punctuation
   if (lastIndex < text.length) {
     result.push(text.slice(lastIndex));
   }
 
   return result;
+}
+
+function isTrailingAbbreviation(segment: string): boolean {
+  const trimmed = segment.trimEnd();
+  if (!trimmed.endsWith('.')) return false;
+  const word = trimmed.replace(/\.$/, '').split(/\s+/).pop() ?? '';
+  return ABBREVIATIONS.has(word.toLowerCase());
 }
 
 export function countTokens(messages: NormalizedMessage[]): number {

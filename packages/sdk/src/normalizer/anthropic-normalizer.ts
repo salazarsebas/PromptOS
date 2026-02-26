@@ -39,7 +39,7 @@ export function denormalizeToAnthropic(messages: NormalizedMessage[]): Anthropic
 
   for (const msg of messages) {
     if (msg.role === 'system') {
-      system = msg.content;
+      system = system ? `${system}\n${msg.content}` : msg.content;
     } else {
       anthropicMessages.push({ role: msg.role, content: msg.content });
     }

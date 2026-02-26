@@ -77,4 +77,32 @@ describe('compressMessages', () => {
     compressMessages(original, 10, 'trim');
     expect(original[0]?.content).toBe(originalContent);
   });
+
+  it('handles emoji without producing invalid text (surrogate pairs)', () => {
+    const emojiContent = '🌍🌎🌏 '.repeat(200);
+    const messages: NormalizedMessage[] = [{ role: 'user', content: emojiContent }];
+    const result = compressMessages(messages, 20, 'trim');
+    // Should not contain lone surrogates — every char should be valid
+    for (const char of result[0]?.content ?? '') {
+      const code = char.codePointAt(0) ?? 0;
+      // Lone surrogates are in range 0xD800-0xDFFF
+      expect(code < 0xd800 || code > 0xdfff).toBe(true);
+    }
+  });
+
+  it('sentence strategy handles abbreviations like Mr. Smith', () => {
+    const messages: NormalizedMessage[] = [
+      {
+        role: 'user',
+        content:
+          'Mr. Smith went to Washington. He met Dr. Jones at the capitol. They discussed the budget.',
+      },
+    ];
+    const maxTokens = 15;
+    const result = compressMessages(messages, maxTokens, 'sentence');
+    // "Mr. Smith" should NOT be treated as a sentence boundary
+    const content = result[0]?.content ?? '';
+    expect(content).not.toBe('Mr. ');
+    expect(content).not.toMatch(/^Mr\.\s*$/);
+  });
 });

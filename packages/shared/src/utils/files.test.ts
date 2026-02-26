@@ -1,4 +1,4 @@
-import { mkdir, rm, writeFile } from 'node:fs/promises';
+import { chmod, mkdir, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
@@ -57,5 +57,29 @@ describe('collectFiles', () => {
     const files = await collectFiles(testDir);
     expect(files).toHaveLength(1);
     expect(files[0]).toContain('main.py');
+  });
+
+  it('skips unreadable directories without crashing', async () => {
+    await mkdir(join(testDir, 'readable'), { recursive: true });
+    await writeFile(join(testDir, 'readable', 'good.ts'), 'export {};');
+    await mkdir(join(testDir, 'restricted'), { recursive: true });
+    await writeFile(join(testDir, 'restricted', 'hidden.ts'), 'export {};');
+    await chmod(join(testDir, 'restricted'), 0o000);
+
+    const files = await collectFiles(testDir);
+    expect(files.some((f) => f.endsWith('good.ts'))).toBe(true);
+    expect(files.some((f) => f.endsWith('hidden.ts'))).toBe(false);
+
+    // Restore permissions for cleanup
+    await chmod(join(testDir, 'restricted'), 0o755);
+  });
+
+  it('handles circular symlinks without crashing', async () => {
+    await mkdir(join(testDir, 'dir-a'), { recursive: true });
+    await writeFile(join(testDir, 'dir-a', 'file.ts'), 'export {};');
+    await symlink(join(testDir, 'dir-a'), join(testDir, 'dir-a', 'loop'));
+
+    const files = await collectFiles(testDir);
+    expect(files.some((f) => f.endsWith('file.ts'))).toBe(true);
   });
 });

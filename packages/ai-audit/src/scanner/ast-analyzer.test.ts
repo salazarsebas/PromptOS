@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { analyzeFile } from './ast-analyzer.js';
+import { analyzeFile, analyzeFileDeep, releaseSourceFile } from './ast-analyzer.js';
 
 const fixturesDir = join(import.meta.dirname, '..', '..', 'test', '__fixtures__');
 
@@ -68,5 +68,18 @@ describe('analyzeFile', () => {
       expect(result.contextSnippet).toBeTruthy();
       expect(result.contextSnippet.length).toBeGreaterThan(0);
     }
+  });
+});
+
+describe('analyzeFileDeep', () => {
+  it('retains sourceFile and releases cleanly', async () => {
+    const result = await analyzeFileDeep(join(fixturesDir, 'openai-usage.ts'));
+
+    expect(result.calls.length).toBeGreaterThan(0);
+    expect(result.sourceFile).toBeDefined();
+    expect(result.sourceFile.getFilePath()).toContain('openai-usage.ts');
+
+    // Release should not throw
+    releaseSourceFile(result.sourceFile);
   });
 });

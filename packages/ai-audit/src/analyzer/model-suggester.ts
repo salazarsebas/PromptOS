@@ -13,6 +13,7 @@ const DOWNGRADE_MAP: Record<string, { target: ModelIdentifier; label: string }> 
   o1: { target: 'o3-mini', label: 'O3-mini' },
 };
 
+// Prompts under 500 tokens are likely simple tasks where a cheaper model suffices
 const SHORT_MESSAGE_THRESHOLD = 500;
 
 export function suggestModelDowngrades(context: AnalyzerContext): OptimizationOpportunity[] {

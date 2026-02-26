@@ -24,6 +24,26 @@
         "ts-morph": "^25.0.0",
       },
     },
+    "packages/router": {
+      "name": "@promptos/router",
+      "version": "0.1.0",
+      "dependencies": {
+        "@promptos/sdk": "workspace:*",
+        "@promptos/shared": "workspace:*",
+      },
+      "devDependencies": {
+        "@anthropic-ai/sdk": "^0.39.0",
+        "openai": "^4.77.0",
+      },
+      "peerDependencies": {
+        "@anthropic-ai/sdk": ">=0.30.0",
+        "openai": ">=4.0.0",
+      },
+      "optionalPeers": [
+        "@anthropic-ai/sdk",
+        "openai",
+      ],
+    },
     "packages/sdk": {
       "name": "@promptos/sdk",
       "version": "0.1.0",
@@ -133,6 +153,8 @@
     "@nodelib/fs.walk": ["@nodelib/fs.walk@1.2.8", "", { "dependencies": { "@nodelib/fs.scandir": "2.1.5", "fastq": "^1.6.0" } }, "sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg=="],
 
     "@promptos/ai-audit": ["@promptos/ai-audit@workspace:packages/ai-audit"],
+
+    "@promptos/router": ["@promptos/router@workspace:packages/router"],
 
     "@promptos/sdk": ["@promptos/sdk@workspace:packages/sdk"],
 

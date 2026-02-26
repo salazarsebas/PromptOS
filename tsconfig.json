@@ -3,6 +3,7 @@
   "references": [
     { "path": "packages/shared" },
     { "path": "packages/ai-audit" },
-    { "path": "packages/sdk" }
+    { "path": "packages/sdk" },
+    { "path": "packages/router" }
   ]
 }

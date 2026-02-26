@@ -1,6 +1,10 @@
 import type { AuditReport } from '@promptos/shared';
 import { capitalize } from './utils.js';
 
+function escapeBackticks(str: string): string {
+  return str.replace(/`/g, '\\`');
+}
+
 export function formatMarkdown(report: AuditReport): string {
   const lines: string[] = [];
 
@@ -67,7 +71,7 @@ function addCostDriversSection(lines: string[], report: AuditReport): void {
     const call = scan.calls[driver.callIndex];
     if (!call) continue;
     lines.push(
-      `| ${i + 1} | \`${call.filePath}:${call.line}\` | \`${call.method}\` | $${driver.monthlyCostUSD.toFixed(2)} |`,
+      `| ${i + 1} | \`${escapeBackticks(call.filePath)}:${call.line}\` | \`${escapeBackticks(call.method)}\` | $${driver.monthlyCostUSD.toFixed(2)} |`,
     );
   }
   lines.push('');
@@ -90,7 +94,7 @@ function addDeepAnalysisSection(lines: string[], report: AuditReport): void {
     for (const opp of opportunities) {
       const severityBadge = opp.severity === 'high' ? '**HIGH**' : opp.severity.toUpperCase();
       lines.push(
-        `| ${severityBadge} | ${opp.type} | \`${opp.filePath}:${opp.line}\` | ${opp.description} | $${opp.estimatedMonthlySavingsUSD.toFixed(2)}/mo |`,
+        `| ${severityBadge} | ${opp.type} | \`${escapeBackticks(opp.filePath)}:${opp.line}\` | ${opp.description} | $${opp.estimatedMonthlySavingsUSD.toFixed(2)}/mo |`,
       );
     }
     lines.push('');

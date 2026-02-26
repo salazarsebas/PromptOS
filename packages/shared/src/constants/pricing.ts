@@ -141,8 +141,10 @@ export const MODEL_PRICING: ModelPricing[] = [
   },
 ];
 
+const PRICING_MAP = new Map<string, ModelPricing>(MODEL_PRICING.map((p) => [p.model, p]));
+
 export function getPricing(model: string): ModelPricing | undefined {
-  return MODEL_PRICING.find((p) => p.model === model);
+  return PRICING_MAP.get(model);
 }
 
 export function getDefaultModel(provider: string, category: string): string {

@@ -41,29 +41,43 @@ async function readConfigFile(filePath: string): Promise<PromptOSConfig> {
   const raw = await readFile(filePath, 'utf-8');
   const parsed: unknown = JSON.parse(raw);
 
-  if (!isValidConfig(parsed)) {
-    throw new Error(`Invalid config file: ${filePath}`);
-  }
+  validateConfig(parsed, filePath);
 
-  return parsed;
+  return parsed as PromptOSConfig;
 }
 
-function isValidConfig(value: unknown): value is PromptOSConfig {
+function validateConfig(value: unknown, filePath: string): asserts value is PromptOSConfig {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) {
-    return false;
+    throw new Error(`Invalid config file: ${filePath} — must be a JSON object`);
   }
 
   const obj = value as Record<string, unknown>;
 
-  return (
-    isOptionalPositiveNumber(obj.callsPerMonth) &&
-    isOptionalPositiveNumber(obj.avgInputTokens) &&
-    isOptionalPositiveNumber(obj.avgOutputTokens) &&
-    isOptionalPositiveNumber(obj.promptTokenThreshold) &&
-    isOptionalType(obj.deep, 'boolean') &&
-    isOptionalFormat(obj.format) &&
-    isOptionalStringArray(obj.exclude)
-  );
+  const numberFields = [
+    'callsPerMonth',
+    'avgInputTokens',
+    'avgOutputTokens',
+    'promptTokenThreshold',
+  ] as const;
+  for (const field of numberFields) {
+    if (!isOptionalPositiveNumber(obj[field])) {
+      throw new Error(`Invalid config file: ${filePath} — "${field}" must be a positive number`);
+    }
+  }
+
+  if (!isOptionalType(obj.deep, 'boolean')) {
+    throw new Error(`Invalid config file: ${filePath} — "deep" must be a boolean`);
+  }
+
+  if (!isOptionalFormat(obj.format)) {
+    throw new Error(
+      `Invalid config file: ${filePath} — "format" must be one of: terminal, json, markdown, html`,
+    );
+  }
+
+  if (!isOptionalStringArray(obj.exclude)) {
+    throw new Error(`Invalid config file: ${filePath} — "exclude" must be an array of strings`);
+  }
 }
 
 function isOptionalType(value: unknown, type: string): boolean {

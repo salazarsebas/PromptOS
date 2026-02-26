@@ -1,4 +1,4 @@
-import { access, writeFile } from 'node:fs/promises';
+import { stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { AuditReport, ReportFormat } from '@promptos/shared';
 import { Command } from 'commander';
@@ -28,7 +28,11 @@ export const cli = new Command()
     const targetPath = resolve(directory);
 
     try {
-      await access(targetPath);
+      const stats = await stat(targetPath);
+      if (!stats.isDirectory()) {
+        console.error(`Error: Not a directory: ${targetPath}`);
+        process.exit(1);
+      }
     } catch {
       console.error(`Error: Directory not found: ${targetPath}`);
       process.exit(1);
@@ -49,16 +53,18 @@ export const cli = new Command()
     }
 
     const estimationOptions = {
-      callsPerMonth: Number(options.callsPerMonth) || config.callsPerMonth || 1000,
-      avgInputTokens: Number(options.avgInputTokens) || config.avgInputTokens || 500,
-      avgOutputTokens: Number(options.avgOutputTokens) || config.avgOutputTokens || 200,
+      callsPerMonth: numericOption(options.callsPerMonth, config.callsPerMonth, 1000),
+      avgInputTokens: numericOption(options.avgInputTokens, config.avgInputTokens, 500),
+      avgOutputTokens: numericOption(options.avgOutputTokens, config.avgOutputTokens, 200),
     };
+
+    const ignoreDirs = config.exclude ? new Set(config.exclude) : undefined;
 
     try {
       let report: AuditReport;
 
       if (deep) {
-        const { scanResult, sourceFiles } = await scanDeep(targetPath);
+        const { scanResult, sourceFiles } = await scanDeep(targetPath, ignoreDirs);
         const costReport = estimateCosts(scanResult, estimationOptions);
 
         const analyzerConfig = resolveAnalyzerConfig({
@@ -86,7 +92,7 @@ export const cli = new Command()
           deepAnalysis,
         };
       } else {
-        const scanResult = await scan(targetPath);
+        const scanResult = await scan(targetPath, ignoreDirs);
         const costReport = estimateCosts(scanResult, estimationOptions);
 
         report = {
@@ -111,3 +117,15 @@ export const cli = new Command()
       process.exit(1);
     }
   });
+
+function numericOption(
+  cliValue: string | undefined,
+  configValue: number | undefined,
+  fallback: number,
+): number {
+  if (cliValue !== undefined) {
+    const n = Number(cliValue);
+    if (!Number.isNaN(n)) return n;
+  }
+  return configValue ?? fallback;
+}
