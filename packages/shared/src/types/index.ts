@@ -32,3 +32,19 @@ export type {
 } from './provider.js';
 
 export type { AuditReport, ReportFormat } from './report.js';
+
+export type {
+  CacheConfig,
+  CacheEntry,
+  CompressionConfig,
+  CompressionStrategy,
+  Middleware,
+  MiddlewareContext,
+  MiddlewareMetadata,
+  MiddlewareNext,
+  MiddlewareResult,
+  NormalizedMessage,
+  SdkClientConfig,
+  SdkProvider,
+  TokenBudgetConfig,
+} from './sdk.js';

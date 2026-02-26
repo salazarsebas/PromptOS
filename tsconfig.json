@@ -1,4 +1,8 @@
 {
   "files": [],
-  "references": [{ "path": "packages/shared" }, { "path": "packages/ai-audit" }]
+  "references": [
+    { "path": "packages/shared" },
+    { "path": "packages/ai-audit" },
+    { "path": "packages/sdk" }
+  ]
 }
