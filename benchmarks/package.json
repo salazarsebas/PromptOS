@@ -1,0 +1,17 @@
+{
+  "name": "@promptos/benchmarks",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bench:cache": "bun run cache-latency.ts",
+    "bench:compression": "bun run compression-throughput.ts",
+    "bench:tokens": "bun run token-estimation-accuracy.ts",
+    "bench:classifier": "bun run classifier-speed.ts",
+    "bench:all": "bun run bench:cache && bun run bench:compression && bun run bench:tokens && bun run bench:classifier"
+  },
+  "dependencies": {
+    "@promptos/shared": "workspace:*",
+    "@promptos/sdk": "workspace:*",
+    "@promptos/router": "workspace:*"
+  }
+}

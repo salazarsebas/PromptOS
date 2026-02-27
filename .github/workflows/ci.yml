@@ -1,19 +1,168 @@
 name: CI
+
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  BUN_VERSION: "1.3.9"
+
 jobs:
-  check:
+  # ──────────────────────────────────────────────
+  # Install & cache dependencies (shared by all)
+  # ──────────────────────────────────────────────
+  install:
+    name: Install
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: oven-sh/setup-bun@v2
         with:
-          bun-version: "1.3.9"
-      - run: bun install --frozen-lockfile
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Cache bun dependencies
+        uses: actions/cache@v4
+        id: bun-cache
+        with:
+          path: |
+            node_modules
+            ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+
+      - name: Install dependencies
+        if: steps.bun-cache.outputs.cache-hit != 'true'
+        run: bun install --frozen-lockfile
+
+  # ──────────────────────────────────────────────
+  # Parallel quality gates
+  # ──────────────────────────────────────────────
+  lint:
+    name: Lint
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Restore dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            node_modules
+            ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+
       - run: bun run lint
+
+  typecheck:
+    name: Typecheck
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Restore dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            node_modules
+            ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+
       - run: bun run typecheck
-      - run: bun run test
+
+  test:
+    name: Test
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Restore dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            node_modules
+            ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+
+      - run: bun run test -- --coverage
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
+          retention-days: 14
+
+  build:
+    name: Build
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Restore dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            node_modules
+            ~/.bun/install/cache
+          key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
+          restore-keys: bun-${{ runner.os }}-
+
+      - run: bun run build
+
+      - name: Verify dist artifacts exist
+        run: |
+          test -d packages/shared/dist
+          test -d packages/ai-audit/dist
+          test -d packages/sdk/dist
+          test -d packages/router/dist
+
+  # ──────────────────────────────────────────────
+  # Final gate — all checks must pass
+  # ──────────────────────────────────────────────
+  ci-ok:
+    name: CI OK
+    if: always()
+    needs: [lint, typecheck, test, build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check all jobs passed
+        run: |
+          if [[ "${{ needs.lint.result }}" != "success" ]] ||
+             [[ "${{ needs.typecheck.result }}" != "success" ]] ||
+             [[ "${{ needs.test.result }}" != "success" ]] ||
+             [[ "${{ needs.build.result }}" != "success" ]]; then
+            echo "::error::One or more CI jobs failed"
+            exit 1
+          fi
+          echo "All checks passed"

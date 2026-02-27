@@ -1,0 +1,11 @@
+{
+  "name": "@promptos/example-audit-scan",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "bun run scan-project.ts"
+  },
+  "dependencies": {
+    "@promptos/ai-audit": "workspace:*"
+  }
+}

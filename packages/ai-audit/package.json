@@ -1,6 +1,8 @@
 {
   "name": "@promptos/ai-audit",
   "version": "0.1.0",
+  "description": "CLI tool that scans codebases for LLM API calls and estimates monthly costs",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "ai-audit": "./dist/bin.js"
@@ -13,6 +15,30 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/salazarsebas/prompos.git",
+    "directory": "packages/ai-audit"
+  },
+  "homepage": "https://github.com/salazarsebas/prompos#readme",
+  "bugs": {
+    "url": "https://github.com/salazarsebas/prompos/issues"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "audit",
+    "cost-estimation",
+    "cli",
+    "scanner",
+    "ast",
+    "openai",
+    "anthropic"
+  ],
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch",

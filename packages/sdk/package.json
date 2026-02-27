@@ -1,6 +1,8 @@
 {
   "name": "@promptos/sdk",
   "version": "0.1.0",
+  "description": "Middleware wrapper for OpenAI/Anthropic clients with automatic caching, prompt compression, and token budget enforcement",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -10,6 +12,29 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/salazarsebas/prompos.git",
+    "directory": "packages/sdk"
+  },
+  "homepage": "https://github.com/salazarsebas/prompos#readme",
+  "bugs": {
+    "url": "https://github.com/salazarsebas/prompos/issues"
+  },
+  "keywords": [
+    "llm",
+    "sdk",
+    "caching",
+    "compression",
+    "token-budget",
+    "middleware",
+    "openai",
+    "anthropic"
+  ],
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch"

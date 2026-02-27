@@ -1,6 +1,8 @@
 {
   "name": "@promptos/router",
   "version": "0.1.0",
+  "description": "Intelligent LLM routing between providers with complexity-based model selection, fallback chains, and health tracking",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -10,6 +12,29 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/salazarsebas/prompos.git",
+    "directory": "packages/router"
+  },
+  "homepage": "https://github.com/salazarsebas/prompos#readme",
+  "bugs": {
+    "url": "https://github.com/salazarsebas/prompos/issues"
+  },
+  "keywords": [
+    "llm",
+    "router",
+    "routing",
+    "fallback",
+    "health-check",
+    "cost-optimization",
+    "openai",
+    "anthropic"
+  ],
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch"

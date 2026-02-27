@@ -1,6 +1,8 @@
 {
   "name": "@promptos/shared",
   "version": "0.1.0",
+  "description": "Shared types, pricing constants, and token estimation utilities for the PromptOS ecosystem",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -10,6 +12,27 @@
       "types": "./dist/index.d.ts"
     }
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/salazarsebas/prompos.git",
+    "directory": "packages/shared"
+  },
+  "homepage": "https://github.com/salazarsebas/prompos#readme",
+  "bugs": {
+    "url": "https://github.com/salazarsebas/prompos/issues"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "pricing",
+    "token-estimation",
+    "types",
+    "promptos"
+  ],
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b --watch"

@@ -1,5 +1,11 @@
 # PromptOS
 
+[![CI](https://github.com/salazarsebas/prompos/actions/workflows/ci.yml/badge.svg)](https://github.com/salazarsebas/prompos/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![npm @promptos/ai-audit](https://img.shields.io/npm/v/@promptos/ai-audit.svg?label=ai-audit)](https://www.npmjs.com/package/@promptos/ai-audit)
+[![npm @promptos/sdk](https://img.shields.io/npm/v/@promptos/sdk.svg?label=sdk)](https://www.npmjs.com/package/@promptos/sdk)
+[![npm @promptos/router](https://img.shields.io/npm/v/@promptos/router.svg?label=router)](https://www.npmjs.com/package/@promptos/router)
+
 **Reduce the marginal cost of using AI.** The infrastructure layer for LLM efficiency.
 
 PromptOS is an AI infrastructure stack that helps teams audit, optimize, and route their LLM usage -- turning overspending into measurable savings. It provides a CLI scanner, an optimization SDK, and an intelligent routing layer, all working together as a monorepo.
@@ -14,6 +20,19 @@ PromptOS is an AI infrastructure stack that helps teams audit, optimize, and rou
 | [`@promptos/shared`](./packages/shared/) | Shared types, pricing constants, and utilities |
 
 For a complete step-by-step walkthrough, see the **[Usage Guide](./GUIDE.md)**.
+
+## Why PromptOS?
+
+| Feature | PromptOS | LiteLLM | Helicone | Portkey |
+|---------|----------|---------|----------|---------|
+| **Audit-first approach** — scan existing code before changing it | Yes | No | No | No |
+| **Zero infrastructure** — no proxy servers, no SaaS dashboard | Yes | Proxy required | SaaS | SaaS |
+| **Drop-in replacement** — same API as OpenAI/Anthropic SDKs | Yes | Own API | Proxy header | Gateway |
+| **Offline cost estimation** — estimate spend without running code | Yes | No | No | No |
+| **Client-side caching & compression** — reduce tokens before they leave | Yes | No | No | No |
+| **Complexity-based routing** — auto-select model tier per request | Yes | Manual rules | No | Manual rules |
+
+PromptOS is designed for teams that want to **understand their LLM spend first**, then **optimize it programmatically** — all without adding infrastructure dependencies.
 
 ## Quick Start
 
@@ -105,6 +124,13 @@ bun run typecheck
 ```
 
 See [CONTRIBUTING.md](./.github/CONTRIBUTING.md) for detailed development guidelines.
+
+## Links
+
+- [Usage Guide](./GUIDE.md) — step-by-step walkthrough
+- [Changelog](./CHANGELOG.md) — release history
+- [Security Policy](./SECURITY.md) — vulnerability reporting
+- [Contributing](./.github/CONTRIBUTING.md) — development guidelines
 
 ## License
 
