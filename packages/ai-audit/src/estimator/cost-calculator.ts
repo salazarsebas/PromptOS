@@ -1,6 +1,8 @@
 import type { CostEstimate, CostReport, DetectedCall, ProviderCostSummary } from '@promptos/shared';
 import { getDefaultModel, getPricing } from '@promptos/shared';
 
+const TOP_COST_DRIVERS_LIMIT = 10;
+
 export interface EstimationOptions {
   callsPerMonth: number;
   avgInputTokens: number;
@@ -70,7 +72,7 @@ export function calculateCosts(calls: DetectedCall[], options: EstimationOptions
 
   const topCostDrivers = [...estimates]
     .sort((a, b) => b.monthlyCostUSD - a.monthlyCostUSD)
-    .slice(0, 10);
+    .slice(0, TOP_COST_DRIVERS_LIMIT);
 
   return {
     totalMonthlyCostUSD: Math.round(totalCost * 100) / 100,

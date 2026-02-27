@@ -64,6 +64,7 @@ jobs:
           key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
           restore-keys: bun-${{ runner.os }}-
 
+      - run: bun install --frozen-lockfile
       - run: bun run lint
 
   typecheck:
@@ -86,6 +87,7 @@ jobs:
           key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
           restore-keys: bun-${{ runner.os }}-
 
+      - run: bun install --frozen-lockfile
       - run: bun run typecheck
 
   test:
@@ -108,6 +110,7 @@ jobs:
           key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
           restore-keys: bun-${{ runner.os }}-
 
+      - run: bun install --frozen-lockfile
       - run: bun run test -- --coverage
 
       - name: Upload coverage report
@@ -138,6 +141,7 @@ jobs:
           key: bun-${{ runner.os }}-${{ hashFiles('bun.lock') }}
           restore-keys: bun-${{ runner.os }}-
 
+      - run: bun install --frozen-lockfile
       - run: bun run build
 
       - name: Verify dist artifacts exist

@@ -12,6 +12,16 @@ const VERSION = '0.1.0';
 
 const VALID_FORMATS = new Set<ReportFormat>(['terminal', 'json', 'markdown', 'html']);
 
+interface CliOptions {
+  format?: string;
+  output?: string;
+  deep?: boolean;
+  config?: string;
+  callsPerMonth?: string;
+  avgInputTokens?: string;
+  avgOutputTokens?: string;
+}
+
 export const cli = new Command()
   .name('ai-audit')
   .description('Scan your codebase for LLM API usage and estimate costs')
@@ -24,7 +34,7 @@ export const cli = new Command()
   .option('--calls-per-month <number>', 'Assumed calls per month per call site', '1000')
   .option('--avg-input-tokens <number>', 'Assumed avg input tokens per call', '500')
   .option('--avg-output-tokens <number>', 'Assumed avg output tokens per call', '200')
-  .action(async (directory: string, options) => {
+  .action(async (directory: string, options: CliOptions) => {
     const targetPath = resolve(directory);
 
     try {
@@ -40,7 +50,7 @@ export const cli = new Command()
 
     // Load config and merge with CLI options (CLI wins)
     const config = await loadConfig(targetPath, options.config).catch(
-      (): Record<string, never> => ({}),
+      (): Record<string, undefined> => ({}),
     );
     const format = (options.format ?? config.format ?? 'terminal') as ReportFormat;
     const deep = options.deep ?? config.deep ?? false;

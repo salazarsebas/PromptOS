@@ -91,7 +91,7 @@ function addDeepAnalysisSection(
   }
 }
 
-function formatSeverity(severity: string): string {
+function formatSeverity(severity: import('@promptos/shared').OpportunitySeverity): string {
   switch (severity) {
     case 'high':
       return chalk.red.bold('[HIGH]');

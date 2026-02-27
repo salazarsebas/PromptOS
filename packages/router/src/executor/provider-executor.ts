@@ -2,6 +2,9 @@ import { createHash } from 'node:crypto';
 import type { CallResult } from '../fallback/fallback-executor.js';
 import type { NormalizedMessage, ProviderConfig, RouterProvider } from '../types.js';
 
+const HASH_PREFIX_LENGTH = 16;
+const DEFAULT_MAX_TOKENS = 4096;
+
 interface OpenAIResponse {
   choices: Array<{ message: { content: string } }>;
   model: string;
@@ -51,7 +54,10 @@ export class ProviderExecutor {
     provider: RouterProvider,
     config: ProviderConfig,
   ): Promise<unknown> {
-    const keyHash = createHash('sha256').update(config.apiKey).digest('hex').slice(0, 16);
+    const keyHash = createHash('sha256')
+      .update(config.apiKey)
+      .digest('hex')
+      .slice(0, HASH_PREFIX_LENGTH);
     const key = `${provider}:${keyHash}:${config.baseURL ?? ''}`;
     let client = this.clients.get(key);
     if (!client) {
@@ -106,7 +112,7 @@ export class ProviderExecutor {
     const requestParams: Record<string, unknown> = {
       model: params.model,
       messages: nonSystemMessages.map((m) => ({ role: m.role, content: m.content })),
-      max_tokens: params.maxTokens ?? 4096,
+      max_tokens: params.maxTokens ?? DEFAULT_MAX_TOKENS,
     };
 
     if (systemText) requestParams.system = systemText;

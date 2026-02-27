@@ -6,6 +6,19 @@ const SIMPLE_TOKEN_CEILING = 500;
 const COMPLEX_TOKEN_FLOOR = 2000;
 const MULTI_TURN_THRESHOLD = 2;
 
+// Scoring weights for each signal (must sum to 1.0)
+const WEIGHT_TOKEN_COUNT = 0.35;
+const WEIGHT_KEYWORD = 0.3;
+const WEIGHT_MULTI_TURN = 0.15;
+const WEIGHT_SYSTEM_PROMPT = 0.1;
+const WEIGHT_MESSAGE_COUNT = 0.1;
+
+// Thresholds for classifying the final score into levels
+const SIMPLE_THRESHOLD = 0.33;
+const COMPLEX_THRESHOLD = 0.66;
+
+const MAX_MESSAGES_FOR_SCORE = 10;
+
 const COMPLEX_KEYWORDS: RegExp[] = [
   /\banalyze\b/i,
   /\bcompare\b/i,
@@ -65,49 +78,47 @@ function computeKeywordScore(text: string): number {
 function computeRawScore(signals: ComplexitySignals): number {
   let score = 0;
 
-  // Token count (weight: 0.35)
   if (signals.tokenCount >= COMPLEX_TOKEN_FLOOR) {
-    score += 0.35;
+    score += WEIGHT_TOKEN_COUNT;
   } else if (signals.tokenCount > SIMPLE_TOKEN_CEILING) {
     const ratio =
       (signals.tokenCount - SIMPLE_TOKEN_CEILING) / (COMPLEX_TOKEN_FLOOR - SIMPLE_TOKEN_CEILING);
-    score += ratio * 0.35;
+    score += ratio * WEIGHT_TOKEN_COUNT;
   }
 
-  // Keyword complexity (weight: 0.30)
-  score += signals.keywordComplexity * 0.3;
+  score += signals.keywordComplexity * WEIGHT_KEYWORD;
 
-  // Multi-turn (weight: 0.15)
   if (signals.hasMultiTurn) {
-    score += 0.15;
+    score += WEIGHT_MULTI_TURN;
   }
 
-  // System prompt (weight: 0.10)
   if (signals.hasSystemPrompt) {
-    score += 0.1;
+    score += WEIGHT_SYSTEM_PROMPT;
   }
 
-  // Message count (weight: 0.10)
-  score += Math.min(signals.messageCount / 10, 1) * 0.1;
+  score += Math.min(signals.messageCount / MAX_MESSAGES_FOR_SCORE, 1) * WEIGHT_MESSAGE_COUNT;
 
   return score;
 }
 
 function scoreToLevel(score: number): ComplexityLevel {
-  if (score < 0.33) return 'simple';
-  if (score < 0.66) return 'moderate';
+  if (score < SIMPLE_THRESHOLD) return 'simple';
+  if (score < COMPLEX_THRESHOLD) return 'moderate';
   return 'complex';
 }
 
 function computeConfidence(score: number, level: ComplexityLevel): number {
+  const moderateBandWidth = COMPLEX_THRESHOLD - SIMPLE_THRESHOLD;
+  const halfBand = moderateBandWidth / 2;
+
   if (level === 'simple') {
-    return Math.max(0, Math.min(1, 1 - score / 0.33));
+    return Math.max(0, Math.min(1, 1 - score / SIMPLE_THRESHOLD));
   }
   if (level === 'complex') {
-    return Math.max(0, Math.min(1, (score - 0.66) / 0.34));
+    return Math.max(0, Math.min(1, (score - COMPLEX_THRESHOLD) / (1 - COMPLEX_THRESHOLD)));
   }
-  // moderate
-  const distToSimple = score - 0.33;
-  const distToComplex = 0.66 - score;
-  return Math.max(0, Math.min(1, Math.min(distToSimple, distToComplex) / 0.165));
+  // moderate: confidence peaks at center of band
+  const distToSimple = score - SIMPLE_THRESHOLD;
+  const distToComplex = COMPLEX_THRESHOLD - score;
+  return Math.max(0, Math.min(1, Math.min(distToSimple, distToComplex) / halfBand));
 }

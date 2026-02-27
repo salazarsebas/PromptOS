@@ -13,7 +13,7 @@ export function createProxy(
   if (typeof target !== 'object' || target === null) return target;
 
   return new Proxy(target as object, {
-    get(obj, prop) {
+    get(obj: object, prop: string | symbol): unknown {
       if (typeof prop === 'symbol') return Reflect.get(obj, prop);
 
       const value = Reflect.get(obj, prop);
