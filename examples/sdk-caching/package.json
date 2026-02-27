@@ -7,6 +7,6 @@
   },
   "dependencies": {
     "@promptos/sdk": "workspace:*",
-    "openai": "^4.77.0"
+    "openai": "^6.25.0"
   }
 }
