@@ -39,6 +39,6 @@
     "dev": "tsc -b --watch"
   },
   "dependencies": {
-    "gpt-tokenizer": "^2.8.0"
+    "gpt-tokenizer": "^3.4.0"
   }
 }

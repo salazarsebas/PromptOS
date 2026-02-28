@@ -57,7 +57,7 @@
     }
   },
   "devDependencies": {
-    "openai": "^4.77.0",
-    "@anthropic-ai/sdk": "^0.39.0"
+    "openai": "^6.25.0",
+    "@anthropic-ai/sdk": "^0.78.0"
   }
 }
