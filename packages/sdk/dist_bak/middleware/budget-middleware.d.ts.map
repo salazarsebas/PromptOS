@@ -1,0 +1,1 @@
+{"version":3,"file":"budget-middleware.d.ts","sourceRoot":"","sources":["../../src/middleware/budget-middleware.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,mBAAmB,EAAE,UAAU,EAAE,iBAAiB,EAAE,MAAM,kBAAkB,CAAC;AAG3F,wBAAgB,sBAAsB,CACpC,MAAM,EAAE,iBAAiB,EACzB,kBAAkB,EAAE,OAAO,EAC3B,mBAAmB,EAAE,mBAAmB,GACvC,UAAU,CAsBZ"}

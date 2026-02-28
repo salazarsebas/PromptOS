@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/estimator/index.ts"],"names":[],"mappings":"AACA,OAAO,EAAE,cAAc,EAA0B,MAAM,sBAAsB,CAAC;AAI9E,MAAM,UAAU,aAAa,CAAC,UAAsB,EAAE,OAA0B;IAC9E,OAAO,cAAc,CAAC,UAAU,CAAC,KAAK,EAAE,OAAO,CAAC,CAAC;AACnD,CAAC"}

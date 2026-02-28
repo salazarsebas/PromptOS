@@ -1,0 +1,1 @@
+{"version":3,"file":"index.d.ts","sourceRoot":"","sources":["../../src/estimator/index.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,UAAU,EAAE,UAAU,EAAE,MAAM,kBAAkB,CAAC;AAC/D,OAAO,EAAkB,KAAK,iBAAiB,EAAE,MAAM,sBAAsB,CAAC;AAE9E,YAAY,EAAE,iBAAiB,EAAE,CAAC;AAElC,wBAAgB,aAAa,CAAC,UAAU,EAAE,UAAU,EAAE,OAAO,EAAE,iBAAiB,GAAG,UAAU,CAE5F"}

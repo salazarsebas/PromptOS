@@ -1,0 +1,1 @@
+{"version":3,"file":"model-suggester.d.ts","sourceRoot":"","sources":["../../src/analyzer/model-suggester.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAmB,uBAAuB,EAAE,MAAM,kBAAkB,CAAC;AAGjF,OAAO,KAAK,EAAE,eAAe,EAAE,MAAM,cAAc,CAAC;AAepD,wBAAgB,sBAAsB,CAAC,OAAO,EAAE,eAAe,GAAG,uBAAuB,EAAE,CAY1F"}
