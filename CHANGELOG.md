@@ -9,27 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-#### @promptos/shared
+#### @prompt-os/shared
 - Token estimation utilities (`estimateTokens`, `estimateTokensFast`)
 - Model pricing constants for OpenAI, Anthropic, and Google models
 - Shared TypeScript types for the PromptOS ecosystem
 - File collection utilities for directory scanning
 
-#### @promptos/ai-audit
+#### @prompt-os/ai-audit
 - CLI scanner that detects LLM API calls via AST analysis (`ts-morph`)
 - Cost estimation engine with per-model pricing breakdowns
 - Deep analysis mode (`--deep`) for optimization opportunity detection
 - Multiple report formats: terminal, JSON, Markdown, HTML
 - Configurable via `.promptosrc.json`
 
-#### @promptos/sdk
+#### @prompt-os/sdk
 - `createClient()` wrapper for OpenAI and Anthropic SDKs
 - In-memory LRU cache middleware with configurable TTL
 - Prompt compression middleware (trim and sentence strategies)
 - Token budget enforcement middleware
 - Composable middleware pipeline
 
-#### @promptos/router
+#### @prompt-os/router
 - `createRouter()` for intelligent multi-provider routing
 - Complexity classifier with weighted signal analysis
 - Three routing strategies: `cost-optimized`, `quality-first`, `balanced`

@@ -1,6 +1,6 @@
 import { access, readFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
-import type { PromptOSConfig } from '@promptos/shared';
+import type { PromptOSConfig } from '@prompt-os/shared';
 
 const CONFIG_FILENAME = '.promptosrc.json';
 

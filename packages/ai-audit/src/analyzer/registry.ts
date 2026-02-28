@@ -2,7 +2,7 @@ import type {
   DeepAnalysisResult,
   OptimizationOpportunity,
   OptimizationType,
-} from '@promptos/shared';
+} from '@prompt-os/shared';
 import { detectCacheOpportunities } from './cache-opportunity.js';
 import type { Analyzer, AnalyzerContext } from './context.js';
 import { suggestModelDowngrades } from './model-suggester.js';

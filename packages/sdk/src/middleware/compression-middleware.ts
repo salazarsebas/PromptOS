@@ -1,4 +1,4 @@
-import type { CompressionConfig, Middleware } from '@promptos/shared';
+import type { CompressionConfig, Middleware } from '@prompt-os/shared';
 import { compressMessages, countTokens } from '../compression/trimmer.js';
 
 export function createCompressionMiddleware(

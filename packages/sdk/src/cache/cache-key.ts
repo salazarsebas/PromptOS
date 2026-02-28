@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import type { NormalizedMessage, SdkProvider } from '@promptos/shared';
+import type { NormalizedMessage, SdkProvider } from '@prompt-os/shared';
 
 export function computeCacheKey(
   provider: SdkProvider,

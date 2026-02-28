@@ -1,4 +1,4 @@
-# @promptos/shared
+# @prompt-os/shared
 
 Shared types, pricing constants, and utilities used internally by PromptOS packages.
 
@@ -9,7 +9,7 @@ Shared types, pricing constants, and utilities used internally by PromptOS packa
 ## Installation
 
 ```bash
-bun add @promptos/shared
+bun add @prompt-os/shared
 ```
 
 ## Exports

@@ -1,4 +1,4 @@
-import type { AuditReport } from '@promptos/shared';
+import type { AuditReport } from '@prompt-os/shared';
 import { describe, expect, it } from 'vitest';
 import { formatHtml } from './html.js';
 

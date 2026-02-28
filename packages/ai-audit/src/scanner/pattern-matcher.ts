@@ -1,5 +1,5 @@
-import type { CallCategory, Provider } from '@promptos/shared';
-import { getDefaultModel, PROVIDERS } from '@promptos/shared';
+import type { CallCategory, Provider } from '@prompt-os/shared';
+import { getDefaultModel, PROVIDERS } from '@prompt-os/shared';
 import type { CallExpression } from 'ts-morph';
 import { SyntaxKind } from 'ts-morph';
 

@@ -1,4 +1,4 @@
-import type { MiddlewareNext } from '@promptos/shared';
+import type { MiddlewareNext } from '@prompt-os/shared';
 
 export function createProxy(
   target: unknown,

@@ -12,10 +12,10 @@ A clear and concise description of what the bug is.
 
 ## Affected package
 
-- [ ] `@promptos/shared`
-- [ ] `@promptos/ai-audit`
-- [ ] `@promptos/sdk`
-- [ ] `@promptos/router`
+- [ ] `@prompt-os/shared`
+- [ ] `@prompt-os/ai-audit`
+- [ ] `@prompt-os/sdk`
+- [ ] `@prompt-os/router`
 
 ## Steps to reproduce
 

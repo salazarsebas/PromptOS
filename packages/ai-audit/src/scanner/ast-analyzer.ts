@@ -1,5 +1,5 @@
-import type { DetectedCall, Provider } from '@promptos/shared';
-import { PROVIDERS } from '@promptos/shared';
+import type { DetectedCall, Provider } from '@prompt-os/shared';
+import { PROVIDERS } from '@prompt-os/shared';
 import type { SourceFile } from 'ts-morph';
 import { Project, SyntaxKind } from 'ts-morph';
 import { matchCallExpression } from './pattern-matcher.js';

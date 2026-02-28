@@ -1,5 +1,5 @@
-import { classifyComplexity, createRouter } from '@promptos/router';
-import type { NormalizedMessage } from '@promptos/shared';
+import { classifyComplexity, createRouter } from '@prompt-os/router';
+import type { NormalizedMessage } from '@prompt-os/shared';
 
 const openaiKey = process.env.OPENAI_API_KEY;
 const anthropicKey = process.env.ANTHROPIC_API_KEY;

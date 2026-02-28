@@ -1,5 +1,5 @@
 {
-  "name": "@promptos/benchmarks",
+  "name": "@prompt-os/benchmarks",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,8 +10,8 @@
     "bench:all": "bun run bench:cache && bun run bench:compression && bun run bench:tokens && bun run bench:classifier"
   },
   "dependencies": {
-    "@promptos/shared": "workspace:*",
-    "@promptos/sdk": "workspace:*",
-    "@promptos/router": "workspace:*"
+    "@prompt-os/shared": "workspace:*",
+    "@prompt-os/sdk": "workspace:*",
+    "@prompt-os/router": "workspace:*"
   }
 }

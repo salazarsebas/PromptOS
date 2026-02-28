@@ -5,63 +5,63 @@
     "": {
       "name": "promptos",
       "devDependencies": {
-        "@biomejs/biome": "^2.0.0",
+        "@biomejs/biome": "^2.4.4",
         "@types/bun": "^1.3.9",
         "@vitest/coverage-v8": "^4.0.18",
         "husky": "^9.1.7",
-        "lint-staged": "^16.2.7",
-        "typescript": "^5.7.0",
+        "lint-staged": "^16.3.0",
+        "typescript": "^5.9.3",
         "vitest": "^4.0.18",
       },
     },
     "benchmarks": {
-      "name": "@promptos/benchmarks",
+      "name": "@prompt-os/benchmarks",
       "dependencies": {
-        "@promptos/router": "workspace:*",
-        "@promptos/sdk": "workspace:*",
-        "@promptos/shared": "workspace:*",
+        "@prompt-os/router": "workspace:*",
+        "@prompt-os/sdk": "workspace:*",
+        "@prompt-os/shared": "workspace:*",
       },
     },
     "examples/audit-scan": {
-      "name": "@promptos/example-audit-scan",
+      "name": "@prompt-os/example-audit-scan",
       "dependencies": {
-        "@promptos/ai-audit": "workspace:*",
+        "@prompt-os/ai-audit": "workspace:*",
       },
     },
     "examples/router-fallback": {
-      "name": "@promptos/example-router-fallback",
+      "name": "@prompt-os/example-router-fallback",
       "dependencies": {
         "@anthropic-ai/sdk": "^0.78.0",
-        "@promptos/router": "workspace:*",
+        "@prompt-os/router": "workspace:*",
         "openai": "^6.25.0",
       },
     },
     "examples/sdk-caching": {
-      "name": "@promptos/example-sdk-caching",
+      "name": "@prompt-os/example-sdk-caching",
       "dependencies": {
-        "@promptos/sdk": "workspace:*",
+        "@prompt-os/sdk": "workspace:*",
         "openai": "^6.25.0",
       },
     },
     "packages/ai-audit": {
-      "name": "@promptos/ai-audit",
+      "name": "@prompt-os/ai-audit",
       "version": "0.1.0",
       "bin": {
         "ai-audit": "./dist/bin.js",
       },
       "dependencies": {
-        "@promptos/shared": "workspace:*",
+        "@prompt-os/shared": "workspace:*",
         "chalk": "^5.4.0",
         "commander": "^14.0.3",
         "ts-morph": "^27.0.2",
       },
     },
     "packages/router": {
-      "name": "@promptos/router",
+      "name": "@prompt-os/router",
       "version": "0.1.0",
       "dependencies": {
-        "@promptos/sdk": "workspace:*",
-        "@promptos/shared": "workspace:*",
+        "@prompt-os/sdk": "workspace:*",
+        "@prompt-os/shared": "workspace:*",
       },
       "devDependencies": {
         "@anthropic-ai/sdk": "^0.78.0",
@@ -77,10 +77,10 @@
       ],
     },
     "packages/sdk": {
-      "name": "@promptos/sdk",
+      "name": "@prompt-os/sdk",
       "version": "0.1.0",
       "dependencies": {
-        "@promptos/shared": "workspace:*",
+        "@prompt-os/shared": "workspace:*",
       },
       "devDependencies": {
         "@anthropic-ai/sdk": "^0.78.0",
@@ -96,7 +96,7 @@
       ],
     },
     "packages/shared": {
-      "name": "@promptos/shared",
+      "name": "@prompt-os/shared",
       "version": "0.1.0",
       "dependencies": {
         "gpt-tokenizer": "^3.4.0",
@@ -194,21 +194,21 @@
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.31", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw=="],
 
-    "@promptos/ai-audit": ["@promptos/ai-audit@workspace:packages/ai-audit"],
+    "@prompt-os/ai-audit": ["@prompt-os/ai-audit@workspace:packages/ai-audit"],
 
-    "@promptos/benchmarks": ["@promptos/benchmarks@workspace:benchmarks"],
+    "@prompt-os/benchmarks": ["@prompt-os/benchmarks@workspace:benchmarks"],
 
-    "@promptos/example-audit-scan": ["@promptos/example-audit-scan@workspace:examples/audit-scan"],
+    "@prompt-os/example-audit-scan": ["@prompt-os/example-audit-scan@workspace:examples/audit-scan"],
 
-    "@promptos/example-router-fallback": ["@promptos/example-router-fallback@workspace:examples/router-fallback"],
+    "@prompt-os/example-router-fallback": ["@prompt-os/example-router-fallback@workspace:examples/router-fallback"],
 
-    "@promptos/example-sdk-caching": ["@promptos/example-sdk-caching@workspace:examples/sdk-caching"],
+    "@prompt-os/example-sdk-caching": ["@prompt-os/example-sdk-caching@workspace:examples/sdk-caching"],
 
-    "@promptos/router": ["@promptos/router@workspace:packages/router"],
+    "@prompt-os/router": ["@prompt-os/router@workspace:packages/router"],
 
-    "@promptos/sdk": ["@promptos/sdk@workspace:packages/sdk"],
+    "@prompt-os/sdk": ["@prompt-os/sdk@workspace:packages/sdk"],
 
-    "@promptos/shared": ["@promptos/shared@workspace:packages/shared"],
+    "@prompt-os/shared": ["@prompt-os/shared@workspace:packages/shared"],
 
     "@rollup/rollup-android-arm-eabi": ["@rollup/rollup-android-arm-eabi@4.59.0", "", { "os": "android", "cpu": "arm" }, "sha512-upnNBkA6ZH2VKGcBj9Fyl9IGNPULcjXRlg0LLeaioQWueH30p6IXtJEbKAgvyv+mJaMxSm1l6xwDXYjpEMiLMg=="],
 

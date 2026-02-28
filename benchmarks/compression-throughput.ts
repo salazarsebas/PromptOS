@@ -1,5 +1,5 @@
-import { compressMessages } from '@promptos/sdk';
-import type { CompressionStrategy, NormalizedMessage } from '@promptos/shared';
+import { compressMessages } from '@prompt-os/sdk';
+import type { CompressionStrategy, NormalizedMessage } from '@prompt-os/shared';
 
 function generateMessages(targetTokens: number): NormalizedMessage[] {
   // ~4 chars per token

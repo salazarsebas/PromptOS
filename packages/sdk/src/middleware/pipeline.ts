@@ -3,7 +3,7 @@ import type {
   MiddlewareContext,
   MiddlewareNext,
   MiddlewareResult,
-} from '@promptos/shared';
+} from '@prompt-os/shared';
 
 export function compose(middlewares: Middleware[]): MiddlewareNext {
   return function execute(initialCtx: MiddlewareContext): Promise<MiddlewareResult> {

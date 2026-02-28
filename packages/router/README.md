@@ -1,4 +1,4 @@
-# @promptos/router
+# @prompt-os/router
 
 Intelligent routing between LLM providers with fallback chains and health tracking.
 
@@ -9,7 +9,7 @@ The router classifies request complexity, selects the optimal model and provider
 ## Installation
 
 ```bash
-bun add @promptos/router
+bun add @prompt-os/router
 ```
 
 Install the provider SDKs you plan to use:
@@ -23,7 +23,7 @@ bun add @anthropic-ai/sdk
 ## Quick Start
 
 ```typescript
-import { createRouter } from '@promptos/router';
+import { createRouter } from '@prompt-os/router';
 
 const router = createRouter({
   providers: {
@@ -200,7 +200,7 @@ interface ComplexityResult {
 | `AllProvidersFailedError` | Every provider in the fallback chain failed |
 
 ```typescript
-import { AllProvidersFailedError } from '@promptos/router';
+import { AllProvidersFailedError } from '@prompt-os/router';
 
 try {
   await router.complete({ messages: [{ role: 'user', content: 'Hello' }] });

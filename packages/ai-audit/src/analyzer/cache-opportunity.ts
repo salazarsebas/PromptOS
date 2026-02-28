@@ -1,4 +1,4 @@
-import type { OptimizationOpportunity } from '@promptos/shared';
+import type { OptimizationOpportunity } from '@prompt-os/shared';
 import { SyntaxKind } from 'ts-morph';
 import { findCallAtLine } from './ast-utils.js';
 import type { AnalyzerContext } from './context.js';

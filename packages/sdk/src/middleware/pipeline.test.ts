@@ -1,4 +1,4 @@
-import type { Middleware, MiddlewareContext, MiddlewareResult } from '@promptos/shared';
+import type { Middleware, MiddlewareContext, MiddlewareResult } from '@prompt-os/shared';
 import { describe, expect, it } from 'vitest';
 import { compose } from './pipeline.js';
 

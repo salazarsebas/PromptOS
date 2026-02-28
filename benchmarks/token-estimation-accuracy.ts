@@ -1,4 +1,4 @@
-import { estimateTokens, estimateTokensFast } from '@promptos/shared';
+import { estimateTokens, estimateTokensFast } from '@prompt-os/shared';
 
 interface TestCase {
   label: string;

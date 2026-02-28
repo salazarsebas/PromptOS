@@ -1,6 +1,6 @@
 import { stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import type { AuditReport, ReportFormat } from '@promptos/shared';
+import type { AuditReport, ReportFormat } from '@prompt-os/shared';
 import { Command } from 'commander';
 import { resolveAnalyzerConfig, runAnalyzers } from './analyzer/index.js';
 import { loadConfig } from './config/loader.js';

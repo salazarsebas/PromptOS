@@ -1,4 +1,4 @@
-import type { CompressionStrategy, Middleware, SdkClientConfig } from '@promptos/shared';
+import type { CompressionStrategy, Middleware, SdkClientConfig } from '@prompt-os/shared';
 import {
   createAnthropicAdapter,
   createAnthropicTerminalMiddleware,

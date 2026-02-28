@@ -1,5 +1,5 @@
-import type { CompressionStrategy, NormalizedMessage } from '@promptos/shared';
-import { estimateTokens } from '@promptos/shared';
+import type { CompressionStrategy, NormalizedMessage } from '@prompt-os/shared';
+import { estimateTokens } from '@prompt-os/shared';
 
 export function compressMessages(
   messages: NormalizedMessage[],

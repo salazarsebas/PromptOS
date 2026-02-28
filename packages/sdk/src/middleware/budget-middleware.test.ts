@@ -1,4 +1,4 @@
-import type { MiddlewareContext, MiddlewareResult } from '@promptos/shared';
+import type { MiddlewareContext, MiddlewareResult } from '@prompt-os/shared';
 import { describe, expect, it, vi } from 'vitest';
 import { TokenBudgetExceededError } from '../errors.js';
 import { createBudgetMiddleware } from './budget-middleware.js';

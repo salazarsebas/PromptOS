@@ -16,7 +16,7 @@ Instead, use [GitHub's private vulnerability reporting](https://github.com/salaz
 
 - A description of the vulnerability
 - Steps to reproduce the issue
-- The affected package(s): `@promptos/shared`, `@promptos/ai-audit`, `@promptos/sdk`, `@promptos/router`
+- The affected package(s): `@prompt-os/shared`, `@prompt-os/ai-audit`, `@prompt-os/sdk`, `@prompt-os/router`
 - Any potential impact assessment
 
 ### Response timeline
@@ -29,10 +29,10 @@ Instead, use [GitHub's private vulnerability reporting](https://github.com/salaz
 
 This security policy covers all four packages in the PromptOS monorepo:
 
-- `@promptos/shared`
-- `@promptos/ai-audit`
-- `@promptos/sdk`
-- `@promptos/router`
+- `@prompt-os/shared`
+- `@prompt-os/ai-audit`
+- `@prompt-os/sdk`
+- `@prompt-os/router`
 
 ### Out of scope
 

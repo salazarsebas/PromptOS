@@ -14,4 +14,4 @@ export type {
   RoutingAttempt,
   RoutingConfig,
   RoutingStrategy,
-} from '@promptos/shared';
+} from '@prompt-os/shared';

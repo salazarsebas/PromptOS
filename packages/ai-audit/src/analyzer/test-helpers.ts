@@ -1,4 +1,4 @@
-import type { CostEstimate, CostReport, DetectedCall } from '@promptos/shared';
+import type { CostEstimate, CostReport, DetectedCall } from '@prompt-os/shared';
 
 /**
  * Filter calls and align cost estimates for analyzer testing.

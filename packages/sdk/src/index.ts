@@ -12,7 +12,7 @@ export type {
   SdkClientConfig,
   SdkProvider,
   TokenBudgetConfig,
-} from '@promptos/shared';
+} from '@prompt-os/shared';
 export { enforceBudget } from './budget/enforcer.js';
 export { computeCacheKey } from './cache/cache-key.js';
 export { MemoryCache } from './cache/memory-cache.js';

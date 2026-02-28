@@ -1,4 +1,4 @@
-# @promptos/ai-audit
+# @prompt-os/ai-audit
 
 Scan codebases for LLM API usage and estimate monthly costs.
 
@@ -9,13 +9,13 @@ Scan codebases for LLM API usage and estimate monthly costs.
 ## Installation
 
 ```bash
-bun add -g @promptos/ai-audit
+bun add -g @prompt-os/ai-audit
 ```
 
 Or use it programmatically:
 
 ```bash
-bun add @promptos/ai-audit
+bun add @prompt-os/ai-audit
 ```
 
 ## CLI Usage
@@ -146,7 +146,7 @@ Each opportunity includes a severity (`high`, `medium`, `low`) and estimated mon
 ## Programmatic API
 
 ```typescript
-import { scan, estimateCosts, formatReport } from '@promptos/ai-audit';
+import { scan, estimateCosts, formatReport } from '@prompt-os/ai-audit';
 
 // 1. Scan a directory
 const scanResult = await scan('./src');

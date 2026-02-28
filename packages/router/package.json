@@ -1,5 +1,5 @@
 {
-  "name": "@promptos/router",
+  "name": "@prompt-os/router",
   "version": "0.1.0",
   "description": "Intelligent LLM routing between providers with complexity-based model selection, fallback chains, and health tracking",
   "license": "MIT",
@@ -41,8 +41,8 @@
     "dev": "tsc -b --watch"
   },
   "dependencies": {
-    "@promptos/shared": "workspace:*",
-    "@promptos/sdk": "workspace:*"
+    "@prompt-os/shared": "workspace:*",
+    "@prompt-os/sdk": "workspace:*"
   },
   "peerDependencies": {
     "openai": ">=4.0.0",

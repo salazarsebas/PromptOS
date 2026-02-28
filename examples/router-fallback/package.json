@@ -1,12 +1,12 @@
 {
-  "name": "@promptos/example-router-fallback",
+  "name": "@prompt-os/example-router-fallback",
   "private": true,
   "type": "module",
   "scripts": {
     "start": "bun run fallback-router.ts"
   },
   "dependencies": {
-    "@promptos/router": "workspace:*",
+    "@prompt-os/router": "workspace:*",
     "openai": "^6.25.0",
     "@anthropic-ai/sdk": "^0.78.0"
   }

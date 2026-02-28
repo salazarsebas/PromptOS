@@ -1,4 +1,4 @@
-import type { CacheEntry } from '@promptos/shared';
+import type { CacheEntry } from '@prompt-os/shared';
 
 export class MemoryCache<T> {
   private readonly store = new Map<string, CacheEntry<T>>();

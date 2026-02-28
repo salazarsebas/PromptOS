@@ -1,5 +1,5 @@
-import type { NormalizedMessage } from '@promptos/shared';
-import { estimateTokens } from '@promptos/shared';
+import type { NormalizedMessage } from '@prompt-os/shared';
+import { estimateTokens } from '@prompt-os/shared';
 import type { ComplexityLevel, ComplexityResult, ComplexitySignals } from '../types.js';
 
 const SIMPLE_TOKEN_CEILING = 500;

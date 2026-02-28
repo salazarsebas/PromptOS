@@ -1,4 +1,4 @@
-import type { CostReport, ScanResult } from '@promptos/shared';
+import type { CostReport, ScanResult } from '@prompt-os/shared';
 import { calculateCosts, type EstimationOptions } from './cost-calculator.js';
 
 export type { EstimationOptions };

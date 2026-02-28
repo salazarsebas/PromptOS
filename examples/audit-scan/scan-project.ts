@@ -1,5 +1,5 @@
-import { estimateCosts, formatReport, scan } from '@promptos/ai-audit';
-import type { AuditReport, ReportFormat } from '@promptos/shared';
+import { estimateCosts, formatReport, scan } from '@prompt-os/ai-audit';
+import type { AuditReport, ReportFormat } from '@prompt-os/shared';
 
 const targetPath = process.argv[2] || '.';
 const format = (process.argv[3] as ReportFormat) || 'terminal';

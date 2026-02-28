@@ -1,4 +1,4 @@
-import { PromptOSError } from '@promptos/sdk';
+import { PromptOSError } from '@prompt-os/sdk';
 import type { RoutingAttempt } from './types.js';
 
 export class RouterError extends PromptOSError {

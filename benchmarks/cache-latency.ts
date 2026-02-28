@@ -1,4 +1,4 @@
-import { MemoryCache } from '@promptos/sdk';
+import { MemoryCache } from '@prompt-os/sdk';
 
 const ITERATIONS = 100_000;
 

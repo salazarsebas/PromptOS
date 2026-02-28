@@ -1,4 +1,4 @@
-import type { MiddlewareContext, MiddlewareResult } from '@promptos/shared';
+import type { MiddlewareContext, MiddlewareResult } from '@prompt-os/shared';
 import { describe, expect, it, vi } from 'vitest';
 import { createCompressionMiddleware } from './compression-middleware.js';
 

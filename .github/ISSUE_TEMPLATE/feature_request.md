@@ -16,10 +16,10 @@ Describe the solution you'd like to see implemented.
 
 ## Target package
 
-- [ ] `@promptos/shared`
-- [ ] `@promptos/ai-audit`
-- [ ] `@promptos/sdk`
-- [ ] `@promptos/router`
+- [ ] `@prompt-os/shared`
+- [ ] `@prompt-os/ai-audit`
+- [ ] `@prompt-os/sdk`
+- [ ] `@prompt-os/router`
 - [ ] New package / monorepo-level
 
 ## Alternatives considered

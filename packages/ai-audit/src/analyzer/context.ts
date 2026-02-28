@@ -3,7 +3,7 @@ import type {
   DetectedCall,
   OptimizationOpportunity,
   PromptOSConfig,
-} from '@promptos/shared';
+} from '@prompt-os/shared';
 import type { SourceFile } from 'ts-morph';
 
 export interface AnalyzerContext {

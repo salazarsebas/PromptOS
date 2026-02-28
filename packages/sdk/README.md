@@ -1,4 +1,4 @@
-# @promptos/sdk
+# @prompt-os/sdk
 
 Middleware wrapper for OpenAI and Anthropic clients with automatic caching, prompt compression, and token budget enforcement.
 
@@ -7,7 +7,7 @@ Middleware wrapper for OpenAI and Anthropic clients with automatic caching, prom
 ## Installation
 
 ```bash
-bun add @promptos/sdk
+bun add @prompt-os/sdk
 ```
 
 Install the provider SDK you plan to use:
@@ -23,7 +23,7 @@ bun add @anthropic-ai/sdk
 ## Quick Start
 
 ```typescript
-import { createClient } from '@promptos/sdk';
+import { createClient } from '@prompt-os/sdk';
 
 const client = await createClient({
   provider: 'openai',
@@ -108,7 +108,7 @@ When input tokens exceed `maxInputTokens`:
 ### OpenAI with Cache + Compression + Budget
 
 ```typescript
-import { createClient } from '@promptos/sdk';
+import { createClient } from '@prompt-os/sdk';
 
 const client = await createClient({
   provider: 'openai',
@@ -130,7 +130,7 @@ const result = await client.chat.completions.create({
 ### Anthropic Client
 
 ```typescript
-import { createClient } from '@promptos/sdk';
+import { createClient } from '@prompt-os/sdk';
 
 const client = await createClient({
   provider: 'anthropic',
@@ -157,8 +157,8 @@ import {
   createCacheMiddleware,
   createCompressionMiddleware,
   createBudgetMiddleware,
-} from '@promptos/sdk';
-import type { Middleware, MiddlewareContext, MiddlewareResult } from '@promptos/sdk';
+} from '@prompt-os/sdk';
+import type { Middleware, MiddlewareContext, MiddlewareResult } from '@prompt-os/sdk';
 
 // Custom logging middleware
 const logger: Middleware = async (ctx, next) => {
@@ -214,7 +214,7 @@ Middlewares execute in order. Each calls `next(ctx)` to continue the chain or re
 | `TokenBudgetExceededError` | Token count exceeds budget and compression is disabled | `tokenCount`, `maxTokens` |
 
 ```typescript
-import { TokenBudgetExceededError } from '@promptos/sdk';
+import { TokenBudgetExceededError } from '@prompt-os/sdk';
 
 try {
   await client.chat.completions.create({ /* ... */ });

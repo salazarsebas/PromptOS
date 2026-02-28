@@ -1,4 +1,4 @@
-import type { Middleware, MiddlewareNext } from '@promptos/shared';
+import type { Middleware, MiddlewareNext } from '@prompt-os/shared';
 import { countTokens } from '../compression/trimmer.js';
 import {
   denormalizeToAnthropic,

@@ -1,4 +1,4 @@
-import type { DetectedCall } from '@promptos/shared';
+import type { DetectedCall } from '@prompt-os/shared';
 import { describe, expect, it } from 'vitest';
 import { calculateCosts } from './cost-calculator.js';
 

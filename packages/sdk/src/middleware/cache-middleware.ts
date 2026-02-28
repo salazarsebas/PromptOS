@@ -1,4 +1,4 @@
-import type { CacheConfig, Middleware, MiddlewareResult } from '@promptos/shared';
+import type { CacheConfig, Middleware, MiddlewareResult } from '@prompt-os/shared';
 import { computeCacheKey } from '../cache/cache-key.js';
 import { MemoryCache } from '../cache/memory-cache.js';
 

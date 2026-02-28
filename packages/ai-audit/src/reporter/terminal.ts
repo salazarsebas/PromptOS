@@ -1,4 +1,4 @@
-import type { AuditReport } from '@promptos/shared';
+import type { AuditReport } from '@prompt-os/shared';
 import chalk from 'chalk';
 import { capitalize } from './utils.js';
 
@@ -70,7 +70,7 @@ export function formatTerminal(report: AuditReport): string {
 
 function addDeepAnalysisSection(
   lines: string[],
-  deepAnalysis: import('@promptos/shared').DeepAnalysisResult,
+  deepAnalysis: import('@prompt-os/shared').DeepAnalysisResult,
 ): void {
   const { opportunities, totalEstimatedSavingsUSD } = deepAnalysis;
 
@@ -91,7 +91,7 @@ function addDeepAnalysisSection(
   }
 }
 
-function formatSeverity(severity: import('@promptos/shared').OpportunitySeverity): string {
+function formatSeverity(severity: import('@prompt-os/shared').OpportunitySeverity): string {
   switch (severity) {
     case 'high':
       return chalk.red.bold('[HIGH]');

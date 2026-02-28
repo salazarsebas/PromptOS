@@ -1,4 +1,4 @@
-import type { AuditReport } from '@promptos/shared';
+import type { AuditReport } from '@prompt-os/shared';
 import { capitalize } from './utils.js';
 
 function escapeBackticks(str: string): string {

@@ -1,4 +1,4 @@
-import type { MiddlewareContext, MiddlewareResult } from '@promptos/shared';
+import type { MiddlewareContext, MiddlewareResult } from '@prompt-os/shared';
 import { describe, expect, it, vi } from 'vitest';
 import { createAnthropicAdapter, createAnthropicTerminalMiddleware } from './anthropic-adapter.js';
 
@@ -14,7 +14,7 @@ function createMockAnthropicClient() {
   };
 }
 
-function createMockPipeline(): import('@promptos/shared').MiddlewareNext {
+function createMockPipeline(): import('@prompt-os/shared').MiddlewareNext {
   return vi.fn().mockImplementation(
     async (ctx: MiddlewareContext): Promise<MiddlewareResult> => ({
       response: { content: [{ type: 'text', text: 'pipeline response' }] },

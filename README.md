@@ -2,9 +2,9 @@
 
 [![CI](https://github.com/salazarsebas/prompos/actions/workflows/ci.yml/badge.svg)](https://github.com/salazarsebas/prompos/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![npm @promptos/ai-audit](https://img.shields.io/npm/v/@promptos/ai-audit.svg?label=ai-audit)](https://www.npmjs.com/package/@promptos/ai-audit)
-[![npm @promptos/sdk](https://img.shields.io/npm/v/@promptos/sdk.svg?label=sdk)](https://www.npmjs.com/package/@promptos/sdk)
-[![npm @promptos/router](https://img.shields.io/npm/v/@promptos/router.svg?label=router)](https://www.npmjs.com/package/@promptos/router)
+[![npm @prompt-os/ai-audit](https://img.shields.io/npm/v/@prompt-os/ai-audit.svg?label=ai-audit)](https://www.npmjs.com/package/@prompt-os/ai-audit)
+[![npm @prompt-os/sdk](https://img.shields.io/npm/v/@prompt-os/sdk.svg?label=sdk)](https://www.npmjs.com/package/@prompt-os/sdk)
+[![npm @prompt-os/router](https://img.shields.io/npm/v/@prompt-os/router.svg?label=router)](https://www.npmjs.com/package/@prompt-os/router)
 
 **Reduce the marginal cost of using AI.** The infrastructure layer for LLM efficiency.
 
@@ -14,10 +14,10 @@ PromptOS is an AI infrastructure stack that helps teams audit, optimize, and rou
 
 | Package | Description |
 |---------|-------------|
-| [`@promptos/ai-audit`](./packages/ai-audit/) | CLI tool that scans codebases for LLM API calls and estimates monthly costs |
-| [`@promptos/sdk`](./packages/sdk/) | Middleware wrapper for OpenAI/Anthropic with caching, compression, and token budgets |
-| [`@promptos/router`](./packages/router/) | Intelligent routing between providers with fallback chains and health tracking |
-| [`@promptos/shared`](./packages/shared/) | Shared types, pricing constants, and utilities |
+| [`@prompt-os/ai-audit`](./packages/ai-audit/) | CLI tool that scans codebases for LLM API calls and estimates monthly costs |
+| [`@prompt-os/sdk`](./packages/sdk/) | Middleware wrapper for OpenAI/Anthropic with caching, compression, and token budgets |
+| [`@prompt-os/router`](./packages/router/) | Intelligent routing between providers with fallback chains and health tracking |
+| [`@prompt-os/shared`](./packages/shared/) | Shared types, pricing constants, and utilities |
 
 For a complete step-by-step walkthrough, see the **[Usage Guide](./GUIDE.md)**.
 
@@ -39,7 +39,7 @@ PromptOS is designed for teams that want to **understand their LLM spend first**
 ### Audit your LLM spend
 
 ```bash
-bun add -g @promptos/ai-audit
+bun add -g @prompt-os/ai-audit
 
 ai-audit ./your-project
 ai-audit ./your-project --deep --format html --output report.html
@@ -48,7 +48,7 @@ ai-audit ./your-project --deep --format html --output report.html
 ### Wrap your client with caching and budgets
 
 ```typescript
-import { createClient } from '@promptos/sdk';
+import { createClient } from '@prompt-os/sdk';
 
 const client = await createClient({
   provider: 'openai',
@@ -68,7 +68,7 @@ const result = await client.chat.completions.create({
 ### Route across providers with automatic fallback
 
 ```typescript
-import { createRouter } from '@promptos/router';
+import { createRouter } from '@prompt-os/router';
 
 const router = createRouter({
   providers: {
@@ -90,13 +90,13 @@ console.log(response.routing.selectedModel);      // e.g. gpt-4o-mini
 ## Architecture
 
 ```
-@promptos/shared           types, pricing data, token utilities
+@prompt-os/shared           types, pricing data, token utilities
     |
-    +-- @promptos/ai-audit     CLI scanner + cost estimator + deep analyzer
+    +-- @prompt-os/ai-audit     CLI scanner + cost estimator + deep analyzer
     |
-    +-- @promptos/sdk          caching, compression, budget middleware
+    +-- @prompt-os/sdk          caching, compression, budget middleware
          |
-         +-- @promptos/router  complexity classifier, strategy routing, fallback, health tracking
+         +-- @prompt-os/router  complexity classifier, strategy routing, fallback, health tracking
 ```
 
 All packages are TypeScript, built with `tsc`, tested with Vitest, and linted with Biome.

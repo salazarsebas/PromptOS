@@ -1,4 +1,4 @@
-import type { OptimizationOpportunity } from '@promptos/shared';
+import type { OptimizationOpportunity } from '@prompt-os/shared';
 import { extractMessageContents, findApiCallNearLine } from './ast-utils.js';
 import type { AnalyzerContext } from './context.js';
 

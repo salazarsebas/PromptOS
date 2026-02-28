@@ -1,5 +1,5 @@
 {
-  "name": "@promptos/ai-audit",
+  "name": "@prompt-os/ai-audit",
   "version": "0.1.0",
   "description": "CLI tool that scans codebases for LLM API calls and estimates monthly costs",
   "license": "MIT",
@@ -46,7 +46,7 @@
     "start": "bun run src/bin.ts"
   },
   "dependencies": {
-    "@promptos/shared": "workspace:*",
+    "@prompt-os/shared": "workspace:*",
     "commander": "^14.0.3",
     "ts-morph": "^27.0.2",
     "chalk": "^5.4.0"

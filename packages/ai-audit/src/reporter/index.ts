@@ -1,4 +1,4 @@
-import type { AuditReport, ReportFormat } from '@promptos/shared';
+import type { AuditReport, ReportFormat } from '@prompt-os/shared';
 import { formatHtml } from './html.js';
 import { formatJson } from './json.js';
 import { formatMarkdown } from './markdown.js';

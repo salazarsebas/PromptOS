@@ -1,5 +1,5 @@
-import type { DetectedCall, ScanError, ScanResult } from '@promptos/shared';
-import { collectFiles } from '@promptos/shared';
+import type { DetectedCall, ScanError, ScanResult } from '@prompt-os/shared';
+import { collectFiles } from '@prompt-os/shared';
 import type { SourceFile } from 'ts-morph';
 import { analyzeFile, analyzeFileDeep, releaseSourceFile } from './ast-analyzer.js';
 

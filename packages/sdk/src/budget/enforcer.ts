@@ -1,4 +1,4 @@
-import type { CompressionStrategy, NormalizedMessage, TokenBudgetConfig } from '@promptos/shared';
+import type { CompressionStrategy, NormalizedMessage, TokenBudgetConfig } from '@prompt-os/shared';
 import { compressMessages, countTokens } from '../compression/trimmer.js';
 import { TokenBudgetExceededError } from '../errors.js';
 

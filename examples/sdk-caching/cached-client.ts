@@ -1,4 +1,4 @@
-import { createClient } from '@promptos/sdk';
+import { createClient } from '@prompt-os/sdk';
 
 const apiKey = process.env.OPENAI_API_KEY;
 if (!apiKey) {

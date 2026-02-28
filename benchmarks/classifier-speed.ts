@@ -1,5 +1,5 @@
-import { classifyComplexity } from '@promptos/router';
-import type { NormalizedMessage } from '@promptos/shared';
+import { classifyComplexity } from '@prompt-os/router';
+import type { NormalizedMessage } from '@prompt-os/shared';
 
 interface BenchCase {
   label: string;

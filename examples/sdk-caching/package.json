@@ -1,12 +1,12 @@
 {
-  "name": "@promptos/example-sdk-caching",
+  "name": "@prompt-os/example-sdk-caching",
   "private": true,
   "type": "module",
   "scripts": {
     "start": "bun run cached-client.ts"
   },
   "dependencies": {
-    "@promptos/sdk": "workspace:*",
+    "@prompt-os/sdk": "workspace:*",
     "openai": "^6.25.0"
   }
 }

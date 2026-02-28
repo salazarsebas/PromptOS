@@ -7,7 +7,7 @@ const dir = fileURLToPath(new URL('.', import.meta.url));
 export default defineConfig({
   resolve: {
     alias: {
-      '@promptos/shared': resolve(dir, '../shared/src/index.ts'),
+      '@prompt-os/shared': resolve(dir, '../shared/src/index.ts'),
     },
   },
   test: {

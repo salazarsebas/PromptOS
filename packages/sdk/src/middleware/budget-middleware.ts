@@ -1,4 +1,4 @@
-import type { CompressionStrategy, Middleware, TokenBudgetConfig } from '@promptos/shared';
+import type { CompressionStrategy, Middleware, TokenBudgetConfig } from '@prompt-os/shared';
 import { enforceBudget } from '../budget/enforcer.js';
 
 export function createBudgetMiddleware(

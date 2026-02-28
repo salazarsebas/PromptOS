@@ -1,5 +1,10 @@
-import type { CostEstimate, CostReport, DetectedCall, ProviderCostSummary } from '@promptos/shared';
-import { getDefaultModel, getPricing } from '@promptos/shared';
+import type {
+  CostEstimate,
+  CostReport,
+  DetectedCall,
+  ProviderCostSummary,
+} from '@prompt-os/shared';
+import { getDefaultModel, getPricing } from '@prompt-os/shared';
 
 const TOP_COST_DRIVERS_LIMIT = 10;
 

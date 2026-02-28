@@ -1,5 +1,5 @@
-import type { ModelIdentifier, OptimizationOpportunity } from '@promptos/shared';
-import { estimateTokensFast, getPricing } from '@promptos/shared';
+import type { ModelIdentifier, OptimizationOpportunity } from '@prompt-os/shared';
+import { estimateTokensFast, getPricing } from '@prompt-os/shared';
 import { extractMessageContents, findApiCallNearLine } from './ast-utils.js';
 import type { AnalyzerContext } from './context.js';
 
@@ -31,7 +31,7 @@ export function suggestModelDowngrades(context: AnalyzerContext): OptimizationOp
 }
 
 function evaluateDowngrade(
-  call: import('@promptos/shared').DetectedCall,
+  call: import('@prompt-os/shared').DetectedCall,
   context: AnalyzerContext,
 ): OptimizationOpportunity | null {
   const downgrade = DOWNGRADE_MAP[call.inferredModel];

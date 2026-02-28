@@ -1,5 +1,5 @@
 {
-  "name": "@promptos/shared",
+  "name": "@prompt-os/shared",
   "version": "0.1.0",
   "description": "Shared types, pricing constants, and token estimation utilities for the PromptOS ecosystem",
   "license": "MIT",

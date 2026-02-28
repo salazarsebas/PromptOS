@@ -24,7 +24,7 @@ bun run bench:classifier
 
 | Benchmark | Package | What it measures |
 |-----------|---------|------------------|
-| `cache-latency.ts` | `@promptos/sdk` | MemoryCache hit/miss/set latency (p50/p95/p99 in µs) over 100k iterations |
-| `compression-throughput.ts` | `@promptos/sdk` | `compressMessages` throughput for trim/sentence strategies at 100-10k tokens |
-| `token-estimation-accuracy.ts` | `@promptos/shared` | `estimateTokens` vs `estimateTokensFast` accuracy and speed across text types |
-| `classifier-speed.ts` | `@promptos/router` | `classifyComplexity` throughput for simple/moderate/complex messages |
+| `cache-latency.ts` | `@prompt-os/sdk` | MemoryCache hit/miss/set latency (p50/p95/p99 in µs) over 100k iterations |
+| `compression-throughput.ts` | `@prompt-os/sdk` | `compressMessages` throughput for trim/sentence strategies at 100-10k tokens |
+| `token-estimation-accuracy.ts` | `@prompt-os/shared` | `estimateTokens` vs `estimateTokensFast` accuracy and speed across text types |
+| `classifier-speed.ts` | `@prompt-os/router` | `classifyComplexity` throughput for simple/moderate/complex messages |

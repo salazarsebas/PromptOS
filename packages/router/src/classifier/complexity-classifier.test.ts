@@ -1,4 +1,4 @@
-import type { NormalizedMessage } from '@promptos/shared';
+import type { NormalizedMessage } from '@prompt-os/shared';
 import { describe, expect, it } from 'vitest';
 import { classifyComplexity } from './complexity-classifier.js';
 

@@ -24,7 +24,7 @@ Each phase builds on the previous one. You can adopt them incrementally -- start
 ### Install the CLI
 
 ```bash
-bun add -g @promptos/ai-audit
+bun add -g @prompt-os/ai-audit
 ```
 
 ### Run a basic scan
@@ -113,7 +113,7 @@ Or create a `.promptosrc.json` in your project root:
 ### Use the API programmatically
 
 ```typescript
-import { scan, estimateCosts, formatReport } from '@promptos/ai-audit';
+import { scan, estimateCosts, formatReport } from '@prompt-os/ai-audit';
 
 const scanResult = await scan('./src');
 
@@ -143,7 +143,7 @@ Once you know where your costs are, wrap your LLM clients with the SDK to reduce
 ### Install
 
 ```bash
-bun add @promptos/sdk
+bun add @prompt-os/sdk
 
 # Plus your provider SDK
 bun add openai        # for OpenAI
@@ -155,7 +155,7 @@ bun add @anthropic-ai/sdk  # for Anthropic
 Replace your direct OpenAI/Anthropic client with a PromptOS-wrapped one. The API stays the same:
 
 ```typescript
-import { createClient } from '@promptos/sdk';
+import { createClient } from '@prompt-os/sdk';
 
 const client = await createClient({
   provider: 'openai',
@@ -236,7 +236,7 @@ When input exceeds the budget:
 ### Step 4: Handle errors
 
 ```typescript
-import { createClient, TokenBudgetExceededError, ProviderNotInstalledError } from '@promptos/sdk';
+import { createClient, TokenBudgetExceededError, ProviderNotInstalledError } from '@prompt-os/sdk';
 
 try {
   const client = await createClient({
@@ -270,7 +270,7 @@ Add the router for automatic model selection, multi-provider fallback, and healt
 ### Install
 
 ```bash
-bun add @promptos/router
+bun add @prompt-os/router
 
 # Install the providers you want to route between
 bun add openai @anthropic-ai/sdk
@@ -279,7 +279,7 @@ bun add openai @anthropic-ai/sdk
 ### Step 1: Create a router
 
 ```typescript
-import { createRouter } from '@promptos/router';
+import { createRouter } from '@prompt-os/router';
 
 const router = createRouter({
   providers: {
@@ -385,7 +385,7 @@ const router = createRouter({
 ### Step 6: Handle failures
 
 ```typescript
-import { createRouter, AllProvidersFailedError } from '@promptos/router';
+import { createRouter, AllProvidersFailedError } from '@prompt-os/router';
 
 try {
   const response = await router.complete({
@@ -411,11 +411,11 @@ A typical adoption path:
 Week 1: Run ai-audit to understand your LLM spend
          → Identify top cost drivers and optimization opportunities
 
-Week 2: Wrap your clients with @promptos/sdk
+Week 2: Wrap your clients with @prompt-os/sdk
          → Enable caching for repeated calls
          → Add token budgets for oversized prompts
 
-Week 3: Set up @promptos/router
+Week 3: Set up @prompt-os/router
          → Route simple queries to cheaper models
          → Add fallback between OpenAI and Anthropic
          → Monitor provider health
@@ -424,9 +424,9 @@ Week 3: Set up @promptos/router
 ### Full example
 
 ```typescript
-import { scan, estimateCosts } from '@promptos/ai-audit';
-import { createClient } from '@promptos/sdk';
-import { createRouter } from '@promptos/router';
+import { scan, estimateCosts } from '@prompt-os/ai-audit';
+import { createClient } from '@prompt-os/sdk';
+import { createRouter } from '@prompt-os/router';
 
 // 1. Audit: understand your current spend
 const scanResult = await scan('./src');

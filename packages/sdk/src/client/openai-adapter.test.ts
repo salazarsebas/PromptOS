@@ -1,4 +1,4 @@
-import type { MiddlewareContext, MiddlewareResult } from '@promptos/shared';
+import type { MiddlewareContext, MiddlewareResult } from '@prompt-os/shared';
 import { describe, expect, it, vi } from 'vitest';
 import { createOpenAIAdapter, createOpenAITerminalMiddleware } from './openai-adapter.js';
 
@@ -15,7 +15,7 @@ function createMockOpenAIClient() {
   };
 }
 
-function createMockPipeline(): import('@promptos/shared').MiddlewareNext {
+function createMockPipeline(): import('@prompt-os/shared').MiddlewareNext {
   return vi.fn().mockImplementation(
     async (ctx: MiddlewareContext): Promise<MiddlewareResult> => ({
       response: { choices: [{ message: { content: 'pipeline response' } }] },

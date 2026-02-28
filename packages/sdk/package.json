@@ -1,5 +1,5 @@
 {
-  "name": "@promptos/sdk",
+  "name": "@prompt-os/sdk",
   "version": "0.1.0",
   "description": "Middleware wrapper for OpenAI/Anthropic clients with automatic caching, prompt compression, and token budget enforcement",
   "license": "MIT",
@@ -41,7 +41,7 @@
     "dev": "tsc -b --watch"
   },
   "dependencies": {
-    "@promptos/shared": "workspace:*"
+    "@prompt-os/shared": "workspace:*"
   },
   "peerDependencies": {
     "openai": ">=4.0.0",
