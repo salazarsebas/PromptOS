@@ -35,7 +35,7 @@ console.log(
   `Complexity: ${simpleComplexity.level} (confidence: ${simpleComplexity.confidence.toFixed(2)})`,
 );
 
-const simpleResponse = await router.message({ messages: simpleMessages });
+const simpleResponse = await router.complete({ messages: simpleMessages });
 console.log(`Provider: ${simpleResponse.provider}`);
 console.log(`Model: ${simpleResponse.routing.selectedModel}`);
 console.log(`Content: ${simpleResponse.content.slice(0, 200)}`);
@@ -60,7 +60,7 @@ console.log(
   `Complexity: ${complexComplexity.level} (confidence: ${complexComplexity.confidence.toFixed(2)})`,
 );
 
-const complexResponse = await router.message({ messages: complexMessages });
+const complexResponse = await router.complete({ messages: complexMessages });
 console.log(`Provider: ${complexResponse.provider}`);
 console.log(`Model: ${complexResponse.routing.selectedModel}`);
 console.log(`Content: ${complexResponse.content.slice(0, 300)}...`);
@@ -68,9 +68,9 @@ console.log(`Latency: ${complexResponse.routing.totalLatencyMs}ms\n`);
 
 // --- Health status ---
 console.log('=== Provider Health ===\n');
-const health = router.getHealthStatus();
-for (const status of health) {
+for (const provider of ['openai', 'anthropic'] as const) {
+  const status = router.getHealthStatus(provider);
   console.log(
-    `${status.provider}: ${status.isHealthy ? 'healthy' : 'unhealthy'} (${status.successCount} ok, ${status.failureCount} failures)`,
+    `${status.provider}: ${status.healthy ? 'healthy' : 'unhealthy'} (${status.totalRequests} requests, ${(status.successRate * 100).toFixed(0)}% success)`,
   );
 }

@@ -1,1 +1,0 @@
-{"version":3,"file":"registry.d.ts","sourceRoot":"","sources":["../../src/analyzer/registry.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EACV,kBAAkB,EAGnB,MAAM,kBAAkB,CAAC;AAE1B,OAAO,KAAK,EAAY,eAAe,EAAE,MAAM,cAAc,CAAC;AAY9D,wBAAgB,YAAY,CAAC,OAAO,EAAE,eAAe,GAAG,kBAAkB,CAczE"}

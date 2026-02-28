@@ -1,1 +1,0 @@
-{"version":3,"file":"trimmer.d.ts","sourceRoot":"","sources":["../../src/compression/trimmer.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,mBAAmB,EAAE,iBAAiB,EAAE,MAAM,kBAAkB,CAAC;AAG/E,wBAAgB,gBAAgB,CAC9B,QAAQ,EAAE,iBAAiB,EAAE,EAC7B,SAAS,EAAE,MAAM,EACjB,QAAQ,GAAE,mBAA4B,GACrC,iBAAiB,EAAE,CAarB;AAwHD,wBAAgB,WAAW,CAAC,QAAQ,EAAE,iBAAiB,EAAE,GAAG,MAAM,CAEjE"}
