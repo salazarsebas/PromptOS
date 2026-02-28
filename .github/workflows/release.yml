@@ -119,6 +119,12 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run build
 
+      - name: Resolve workspace protocol
+        working-directory: packages/ai-audit
+        run: |
+          SHARED_VERSION=$(node -p "require('../shared/package.json').version")
+          sed -i 's/"workspace:\*"/"'"$SHARED_VERSION"'"/g' package.json
+
       - name: Publish
         working-directory: packages/ai-audit
         run: |
@@ -154,6 +160,12 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bun run build
 
+      - name: Resolve workspace protocol
+        working-directory: packages/sdk
+        run: |
+          SHARED_VERSION=$(node -p "require('../shared/package.json').version")
+          sed -i 's/"workspace:\*"/"'"$SHARED_VERSION"'"/g' package.json
+
       - name: Publish
         working-directory: packages/sdk
         run: |
@@ -188,6 +200,14 @@ jobs:
 
       - run: bun install --frozen-lockfile
       - run: bun run build
+
+      - name: Resolve workspace protocol
+        working-directory: packages/router
+        run: |
+          SHARED_VERSION=$(node -p "require('../shared/package.json').version")
+          SDK_VERSION=$(node -p "require('../sdk/package.json').version")
+          sed -i 's/"@promptos\/shared": "workspace:\*"/"@promptos\/shared": "'"$SHARED_VERSION"'"/g' package.json
+          sed -i 's/"@promptos\/sdk": "workspace:\*"/"@promptos\/sdk": "'"$SDK_VERSION"'"/g' package.json
 
       - name: Publish
         working-directory: packages/router
