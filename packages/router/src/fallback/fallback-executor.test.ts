@@ -135,9 +135,10 @@ describe('executeFallbackChain', () => {
     expect(attempts).toHaveLength(3);
     expect(delays).toHaveLength(2);
     // Second delay should be larger than first (exponential backoff)
+    // Use relaxed comparison since jitter (±25%) can narrow the gap
     const firstDelay = delays[0] ?? 0;
     const secondDelay = delays[1] ?? 0;
-    expect(secondDelay).toBeGreaterThan(firstDelay * 1.5);
+    expect(secondDelay).toBeGreaterThan(firstDelay);
   });
 
   it('records latency in attempts', async () => {
