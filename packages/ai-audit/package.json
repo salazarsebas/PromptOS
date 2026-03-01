@@ -22,12 +22,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/salazarsebas/prompos.git",
+    "url": "https://github.com/salazarsebas/PromptOS.git",
     "directory": "packages/ai-audit"
   },
-  "homepage": "https://github.com/salazarsebas/prompos#readme",
+  "homepage": "https://github.com/salazarsebas/PromptOS#readme",
   "bugs": {
-    "url": "https://github.com/salazarsebas/prompos/issues"
+    "url": "https://github.com/salazarsebas/PromptOS/issues"
   },
   "keywords": [
     "llm",
